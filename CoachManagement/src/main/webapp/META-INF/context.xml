@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/CoachManagement"/>
+<Context path="/CoachManagement">
+  <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="coachdb" password="12345678" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/coachdb?zeroDateTimeBehavior=CONVERT_TO_NULL" username="root"/>
+</Context>

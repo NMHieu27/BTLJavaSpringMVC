@@ -32,11 +32,9 @@
 
     <!-- Main content -->
     <section class="content">
+        
         <div class="container-fluid">
-            <!-- Info boxes -->
-            <!-- Main row -->
-            <!-- /.row -->
-            <!-- Default box -->
+            
             <div class="d-flex p-0 text-white" style="margin-bottom: 10px">
                 <!-- <div class="p-2 bg-info">Flex item 1</div> -->
                 <a class="btn btn-success" href="#">
@@ -44,6 +42,7 @@
                     Thêm
                 </a>
             </div>
+            
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Người dùng</h3>

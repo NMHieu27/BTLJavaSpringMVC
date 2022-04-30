@@ -50,7 +50,7 @@ public class HomeAdminController {
         }
         else{
             if(this.userService.addUser(user) == true){
-                return "redirect:/admin/users-manage";
+                return "redirect:/users-manage";
             }
             model.addAttribute("errMsg", "Có lỗi xảy ra");
         }

@@ -25,7 +25,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     
     <definition name="home-admin" extends="baseAdmin">
-        <put-attribute name="title" value="Home-ADMIN" />
+        <put-attribute name="title" value="Trang chủ Admin" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/home-admin.jsp" />
+    </definition>
+    
+    <definition name="users-manage" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí người dùng" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/user/users-manage.jsp" />
     </definition>
 </tiles-definitions>

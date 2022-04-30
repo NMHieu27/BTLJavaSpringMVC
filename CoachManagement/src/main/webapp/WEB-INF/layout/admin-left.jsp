@@ -45,31 +45,31 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/users-manage" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Người dùng</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/coach-manage" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Xe</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/route-manage" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tuyến xe</p>
                             </a>
                         </li>                   
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/coaches-manage" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Chuyến xe</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/price-manage" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Giá</p>
                             </a>
@@ -87,13 +87,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/stat-route" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Chuyến xe theo tuyến</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<c:url value="/admin/stat-revenue" />" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Doanh thu</p>
                             </a>

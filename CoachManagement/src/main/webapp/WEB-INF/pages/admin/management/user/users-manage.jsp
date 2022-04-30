@@ -37,7 +37,14 @@
             <!-- Main row -->
             <!-- /.row -->
             <!-- Default box -->
-            <div class="card">
+            <div class="d-flex p-0 text-white" style="margin-bottom: 10px">
+                <!-- <div class="p-2 bg-info">Flex item 1</div> -->
+                <a class="btn btn-success" href="#">
+                    <i class="fas fa-plus-circle"></i>
+                    Thêm
+                </a>
+            </div>
+            <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Người dùng</h3>
 
@@ -77,61 +84,61 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="u" items="${users}">
-                            <tr>
-                                <td>
-                                    ${u.id}
-                                </td>
-                                <td>
-                                    <a>
-                                        ${u.fullname}
-                                    </a>
-                                </td>
+                            <c:forEach var="u" items="${users}">
+                                <tr>
+                                    <td>
+                                        ${u.id}
+                                    </td>
+                                    <td>
+                                        <a>
+                                            ${u.fullname}
+                                        </a>
+                                    </td>
 
-                                <td>
-                                    <a>${u.username}</a>
-                                    <br/>
-                                    <small>
-                                        Created 01.01.2019
-                                    </small>
-                                </td>
-                                <td>
-                                    <div>
-                                        ${u.password}
-                                    </div>
-                                </td>
+                                    <td>
+                                        <a>${u.username}</a>
+                                        <br/>
+                                        <small>
+                                            Created 01.01.2019
+                                        </small>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            ${u.password}
+                                        </div>
+                                    </td>
 
-                                <td>
-                                    <div>
-                                        ${u.userRole}
-                                    </div>
-                                </td>
+                                    <td>
+                                        <div>
+                                            ${u.userRole}
+                                        </div>
+                                    </td>
 
-                                <td>
-                            <c:choose>
-                                <c:when test="${u.avatar != null && u.avatar.startsWith('https') == true}">
-                                    <img class="table-avatar" src="${u.avatar}" alt="Card image">
-                                </c:when>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${u.avatar != null && u.avatar.startsWith('https') == true}">
+                                                <img class="table-avatar" src="${u.avatar}" alt="Card image">
+                                            </c:when>
 
-                                <c:when test="${u.avatar == null || u.avatar.startsWith('https') == false}">
-                                    <img class="table-avatar" src="<c:url value="/images/default.jpg" />" alt="Card image">
-                                </c:when>
-                            </c:choose>
-                            </td>
-                            <td class="text-right py-0 align-middle">
-                                <a class="btn btn-info btn-sm" href="#">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Sửa
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="#">
-                                    <i class="fas fa-trash">
-                                    </i>
-                                    Xóa
-                                </a>
-                            </td>
-                            </tr>
-                        </c:forEach>
+                                            <c:when test="${u.avatar == null || u.avatar.startsWith('https') == false}">
+                                                <img class="table-avatar" src="<c:url value="/images/default.jpg" />" alt="Card image">
+                                            </c:when>
+                                        </c:choose>
+                                    </td>
+                                    <td class="text-right py-0 align-middle">
+                                        <a class="btn btn-info btn-sm" href="#">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Sửa
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="#">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Xóa
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                 </div>

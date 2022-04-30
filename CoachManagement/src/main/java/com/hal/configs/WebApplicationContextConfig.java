@@ -5,6 +5,8 @@
  */
 package com.hal.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -58,5 +60,17 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         resolver.setDefaultEncoding("UTF-8");
 
         return resolver;
+    }
+    
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "ddphodfop",
+                "api_key", "639657923925892",
+                "api_secret", "qUhE-fvxlzYeATpO5EtR5v6lG8M",
+                "secure", true
+        ));
+
+        return c;
     }
 }

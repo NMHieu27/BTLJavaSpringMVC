@@ -12,5 +12,5 @@ import java.util.List;
  * @author Asus
  */
 public interface UserService {
-    List<User> getUsers();
+    List<User> getUsers(String username);
 }

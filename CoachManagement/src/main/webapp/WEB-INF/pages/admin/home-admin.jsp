@@ -104,17 +104,17 @@
 
                                     <td>
                                         <div>
-                                            ${u.user_role}
+                                            ${u.userRole}
                                         </div>
                                     </td>
 
                                     <td>
                                         <c:choose>
-                                            <c:when test="${u.image != null && u.image.startsWith('https') == true}">
-                                                <img class="table-avatar" src="${u.image}" alt="Card image">
+                                            <c:when test="${u.avatar != null && u.avatar.startsWith('https') == true}">
+                                                <img class="table-avatar" src="${u.avatar}" alt="Card image">
                                             </c:when>
 
-                                            <c:when test="${u.image == null || u.image.startsWith('https') == false}">
+                                            <c:when test="${u.avatar == null || u.avatar.startsWith('https') == false}">
                                                 <img class="table-avatar" src="<c:url value="/images/default.jpg" />" alt="Card image">
                                             </c:when>
                                         </c:choose>

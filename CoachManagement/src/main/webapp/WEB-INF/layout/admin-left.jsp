@@ -3,7 +3,7 @@
     Created on : Apr 29, 2022, 9:26:17 AM
     Author     : Asus
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-primary elevation-4">
@@ -17,14 +17,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img
-                    src="dist/img/11.png"
-                    class="img-circle elevation-2"
-                    alt="User Image"
-                    />
+                <img class="img-circle elevation-2" src="<c:url value="/images/2.jpg" />" alt="Avatar" />
             </div>
             <div class="info">
-                <a href="#" class="d-block">Nam Lưn</a>
+                <a href="#" class="d-block">Híu nè</a>
             </div>
         </div>
 

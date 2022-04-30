@@ -22,7 +22,7 @@ public class HomeController {
     
     @GetMapping("/")
     public String index(Model model){
-        model.addAttribute("users", this.userService.getUsers());
-        return "index";
+        model.addAttribute("users", this.userService.getUsers(null));
+        return "home-admin";
     }
 }

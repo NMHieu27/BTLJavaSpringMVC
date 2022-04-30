@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand">
+<nav class="main-header navbar navbar-expand" style="background-color:#ffffff">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">

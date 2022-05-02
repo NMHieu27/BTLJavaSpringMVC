@@ -4,16 +4,13 @@
  */
 package com.hal.service;
 
-import com.hal.pojo.User;
+import com.hal.pojo.Category;
 import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface UserService {
-    List<User> getUsers(String username);
-    boolean addUser(User user);
-    User getUserById(int userId);
-    boolean deleteUser(User user);
+public interface CategoryService {
+    List<Category> getCates(String kw);
 }

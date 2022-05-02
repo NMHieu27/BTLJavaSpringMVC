@@ -4,8 +4,8 @@
  */
 package com.hal.repository.impl;
 
-import com.hal.pojo.User;
-import com.hal.repository.UserRepository;
+import com.hal.pojo.Coach;
+import com.hal.repository.CoachRepository;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,54 +25,45 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository{
+public class CoachRepositoryImpl implements CoachRepository{
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public List<User> getUsers(String username) {
+    public List<Coach> getCoach(String name) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> query = builder.createQuery(User.class);
-        Root root = query.from(User.class);
+        CriteriaQuery<Coach> query = builder.createQuery(Coach.class);
+        Root root = query.from(Coach.class);
         query = query.select(root);
-        
-        if (username != null) {
-            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
+        if(name != null){
+            Predicate p = builder.like(root.get("name").as(String.class), name.trim());
             query = query.where(p);
         }
-        
         Query q = session.createQuery(query);
         return q.getResultList();
     }
 
     @Override
-    public boolean addUser(User user) {
+    public void addCoach(Coach coach) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        try{
-            session.save(user);
-            return true;
-        } catch(HibernateException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        return false;
+        session.save(coach);
     }
 
     @Override
-    public User getUserById(int userId) {
-        User user;
+    public Coach getCoachById(int coachId) {
+        Coach coach;
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        user = session.get(User.class, userId);
-        return user;
-        
+        coach = session.get(Coach.class, coachId);
+        return coach;
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean deleteCoach(Coach coach) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try{
-            session.delete(user);
+            session.delete(coach);
             return true;
         }
         catch(HibernateException ex){
@@ -80,4 +71,5 @@ public class UserRepositoryImpl implements UserRepository{
         }
         return false;
     }
+    
 }

@@ -4,16 +4,18 @@
  */
 package com.hal.repository.impl;
 
-import com.hal.pojo.User;
-import com.hal.repository.UserRepository;
+import com.hal.pojo.Route;
+import com.hal.pojo.Station;
+import com.hal.repository.RouteRepository;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -25,59 +27,61 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository{
+public class RouteRepositoryImpl implements RouteRepository {
+
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
-    public List<User> getUsers(String username) {
+    public List<Object[]> getRouteDetail(String name) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> query = builder.createQuery(User.class);
-        Root root = query.from(User.class);
-        query = query.select(root);
-        
-        if (username != null) {
-            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
-            query = query.where(p);
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rootR = query.from(Route.class);
+        Root rootStar = query.from(Station.class);
+        Root rootDes = query.from(Station.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        if (name != null) {
+            predicates.add(builder.like(rootR.get("name").as(String.class), name.trim()));
         }
-        
+        predicates.add(builder.equal(rootR.get("startingpointId"), rootStar.get("id")));
+        predicates.add(builder.equal(rootR.get("destinationId"), rootDes.get("id")));
+
+        query.multiselect(rootR.get("id"), rootR.get("name"), rootR.get("price"), rootStar.get("name"), rootDes.get("name"));
+
+        query.where(predicates.toArray(new Predicate[]{}));
         Query q = session.createQuery(query);
         return q.getResultList();
+
     }
 
     @Override
-    public boolean addUser(User user) {
+    public void addRoute(Route route) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        session.save(route);
+    }
+
+    @Override
+    public Route getRouteById(int i) {
+        Route route;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        route = session.get(Route.class, i);
+        return route;
+    }
+
+    @Override
+    public boolean deleteRoute(Route route) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try{
-            session.save(user);
-            return true;
-        } catch(HibernateException ex){
-            System.out.println(ex.getMessage());
-        }
-        
-        return false;
-    }
-
-    @Override
-    public User getUserById(int userId) {
-        User user;
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        user = session.get(User.class, userId);
-        return user;
-        
-    }
-
-    @Override
-    public boolean deleteUser(User user) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        try{
-            session.delete(user);
+            session.delete(route);
             return true;
         }
         catch(HibernateException ex){
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
         }
         return false;
     }
+
 }

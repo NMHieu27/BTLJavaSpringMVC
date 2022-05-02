@@ -4,16 +4,15 @@
  */
 package com.hal.service;
 
-import com.hal.pojo.User;
+import com.hal.pojo.Coaches;
 import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface UserService {
-    List<User> getUsers(String username);
-    boolean addUser(User user);
-    User getUserById(int userId);
-    boolean deleteUser(User user);
+public interface CoachesService {
+    List<Object[]> getCoaches(String name);
+    Coaches getCoachesById(int coachesId);
+    boolean deleteCoaches(Coaches coaches);
 }

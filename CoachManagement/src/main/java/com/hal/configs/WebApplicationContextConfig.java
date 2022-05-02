@@ -7,9 +7,12 @@ package com.hal.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.hal.formatter.CategoryFormatter;
+import com.hal.formatter.StationFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -53,7 +56,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-    
+
     @Bean
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -61,7 +64,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 
         return resolver;
     }
-    
+
     @Bean
     public Cloudinary cloudinary() {
         Cloudinary c = new Cloudinary(ObjectUtils.asMap(
@@ -72,5 +75,11 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         ));
 
         return c;
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new StationFormatter());
+        registry.addFormatter(new CategoryFormatter());
     }
 }

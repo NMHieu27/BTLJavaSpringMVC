@@ -4,16 +4,16 @@
  */
 package com.hal.repository;
 
-import com.hal.pojo.User;
+import com.hal.pojo.Pricechange;
 import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface UserRepository {
-    List<User> getUsers(String username);
-    boolean addUser(User user);
-    User getUserById(int userId);
-    boolean deleteUser(User user);
+public interface PriceChangeRepository {
+    List<Pricechange> getPriceChange(String name);
+    void addPrice(Pricechange pricechange);
+    Pricechange getPriceById(int id);
+    boolean deletePrice(Pricechange pricechange);
 }

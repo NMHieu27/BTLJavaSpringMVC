@@ -29,8 +29,52 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/pages/admin/home-admin.jsp" />
     </definition>
     
+    <!--    Người dùng-->
     <definition name="users-manage" extends="baseAdmin">
         <put-attribute name="title" value="Quản lí người dùng" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/user/users-manage.jsp" />
     </definition>
+    
+    <definition name="add-user" extends="baseAdmin">
+        <put-attribute name="title" value="Thêm người dùng" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/user/add-user.jsp" />
+    </definition>
+    
+    <!--    Giá -->
+    <definition name="price-manage" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí giá" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/price/price-manage.jsp" />
+    </definition>
+    
+    <definition name="add-price" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí giá" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/price/add-price.jsp" />
+    </definition>
+    
+    <!--Xe khách-->
+    <definition name="coach-manage" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí xe khách" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/coach/coach-manage.jsp" />
+    </definition>
+    <definition name="add-coach" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí xe khách" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/coach/add-coach.jsp" />
+    </definition>
+    
+    <!--Các chuyến xe-->
+    <definition name="coaches-manage" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí xe khách" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/coaches/coaches-manage.jsp" />
+    </definition>
+    
+    <!--Tuyến xe-->
+    <definition name="route-manage" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí tuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/route/route-manage.jsp" />
+    </definition>
+    <definition name="add-route" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí tuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/route/add-route.jsp" />
+    </definition>
+    
 </tiles-definitions>

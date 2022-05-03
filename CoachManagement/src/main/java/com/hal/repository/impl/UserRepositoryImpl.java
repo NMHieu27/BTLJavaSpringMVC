@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -95,5 +96,21 @@ public class UserRepositoryImpl implements UserRepository {
         } 
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean updateUserByAdmin(User user, int userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaUpdate<User> cu = builder.createCriteriaUpdate(User.class);
+        Root root = cu.from(User.class);
+        cu.set("fullname", user.getFullname());
+        cu.set("phone", user.getPhone());
+        cu.set("gender", user.getGender());
+        cu.set("address", user.getAddress());
+        cu.set("userRole", user.getUserRole());
+        cu.set("active", user.getActive());
+        cu = cu.where(builder.equal(root.get("id").as(Integer.class), userId));
+        return session.createQuery(cu).executeUpdate() > 0;
     }
 }

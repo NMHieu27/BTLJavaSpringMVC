@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <c:url value="/admin/coach-manage/add-coach" var="action" />
+                    <c:url value="/admin/coach-manage/update-coach/${coach.id}" var="action" />
                     <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="coach">
                         <div class="form-group">
                             <label for="name">Tên xe</label>
@@ -71,18 +71,6 @@
                             <form:textarea id="describe" path="describe" 
                                            cssClass="form-control" />
                         </div>
-
-                        <label for="file">Avatar</label>
-                        <div class="custom-file mb-3 form-group">   
-                            <form:input
-                                type="file"
-                                class="custom-file-input form-control"
-                                id="file"
-                                name="file"
-                                path="file"
-                                />
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
                             
                         <div class="form-group">
                             <label for="active">Trạng thái</label>
@@ -98,7 +86,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="categoryId">
+                            <label for="destinationId">
                                 Loại xe
                             </label>
                             <form:select path="categoryId" cssClass="form-control">

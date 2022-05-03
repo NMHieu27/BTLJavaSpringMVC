@@ -48,4 +48,9 @@ public class RouteServiceImpl implements RouteService {
         return this.routeRepository.getRoutes(string);
     }
 
+    @Override
+    public boolean updateRouteByAdmin(Route route, int i) {
+        return this.routeRepository.updateRouteByAdmin(route, i);
+    }
+
 }

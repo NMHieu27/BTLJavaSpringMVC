@@ -13,12 +13,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm xe khách</h1>
+                    <h1>Thêm tuyến xe</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Xe khách</li>
+                        <li class="breadcrumb-item active">Tuyến xe</li>
                     </ol>
                 </div>
             </div>
@@ -50,59 +50,32 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <c:url value="/admin/coach-manage/add-coach" var="action" />
-                    <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="coach">
+                    <c:url value="/admin/route-manage/update-route/${route.id}" var="action" />
+                    <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="route">
                         <div class="form-group">
-                            <label for="name">Tên xe</label>
+                            <label for="name">Tên tuyến xe</label>
                             <form:input type="text" id="name" path="name" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="licenseplates">Biển số</label>
-                            <form:input type="text" id="licenseplates" path="licenseplates" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label for="price">Giá</label>
                             <form:input type="number" id="price" path="price" placeholder="0" step="500" min="0" max="9999999999"  class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label for="describe">
-                                Mô tả
+                            <label for="startingpointId">
+                                Điểm đón khách
                             </label>
-                            <form:textarea id="describe" path="describe" 
-                                           cssClass="form-control" />
-                        </div>
-
-                        <label for="file">Avatar</label>
-                        <div class="custom-file mb-3 form-group">   
-                            <form:input
-                                type="file"
-                                class="custom-file-input form-control"
-                                id="file"
-                                name="file"
-                                path="file"
-                                />
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
-                            
-                        <div class="form-group">
-                            <label for="active">Trạng thái</label>
-                            <form:select
-                                id="active"
-                                name="active"
-                                class="custom-select mb-3 form-control"
-                                path="active"
-                                >
-                                <form:option value="1" label="Còn" />
-                                <form:option value="0" label="Không" />
+                            <form:select path="startingpointId" cssClass="form-control">
+                                <form:options items="${station}"  
+                                              itemLabel="name" 
+                                              itemValue="id" />
                             </form:select>
                         </div>
-
                         <div class="form-group">
-                            <label for="categoryId">
-                                Loại xe
+                            <label for="destinationId">
+                                Điểm trả khách
                             </label>
-                            <form:select path="categoryId" cssClass="form-control">
-                                <form:options items="${cates}"  
+                            <form:select path="destinationId" cssClass="form-control">
+                                <form:options items="${station}"  
                                               itemLabel="name" 
                                               itemValue="id" />
                             </form:select>
@@ -110,7 +83,7 @@
 
                         <div class="row form-group">
                             <div class="col-12">
-                                <a href="<c:url value="/admin/coach-manage"/>" class="btn btn-secondary">Quay lại</a>
+                                <a href="<c:url value="/admin/route-manage"/>" class="btn btn-secondary">Quay lại</a>
                                 <input
                                     type="submit"
                                     value="Lưu thông tin"
@@ -128,10 +101,3 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<script>
-    // Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>

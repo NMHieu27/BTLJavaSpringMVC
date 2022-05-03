@@ -16,4 +16,5 @@ public interface CoachService {
     boolean addCoach(Coach coach);
     Coach getCoachById(int coachId);
     boolean deleteCoach(Coach coach);
+    boolean updateCoachByAdmin(Coach coach, int coachId);
 }

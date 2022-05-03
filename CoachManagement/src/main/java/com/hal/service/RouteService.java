@@ -17,4 +17,5 @@ public interface RouteService {
     boolean addRoute(Route route);
     Route getRouteById(int routeId);
     boolean deleteRoute(Route route);
+    boolean updateRouteByAdmin(Route route, int routeId);
 }

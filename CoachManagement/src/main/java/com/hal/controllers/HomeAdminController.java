@@ -84,6 +84,24 @@ public class HomeAdminController {
         }
         return "add-user";
     }
+    
+    @GetMapping("/users-manage/update-user/{user_id}")
+    public String updateUserView(Model model, @PathVariable(value = "user_id") int userId){
+        model.addAttribute("user", this.userService.getUserById(userId));
+        return "update-user";
+    }
+    
+    @PostMapping("/users-manage/update-user/{user_id}")
+    public String updatePriceProcess(Model model, 
+            @ModelAttribute(value = "user") User user,
+            @PathVariable(value = "user_id") int i) {
+        if(this.userService.updateUserByAdmin(user, i) == true){
+            return "redirect:/admin/users-manage";
+        }
+        model.addAttribute("errMsg", "Không thể sửa");
+        return "update-user";
+    }
+    
 
     @GetMapping("/users-manage/delete/{user_id}")
     public String deleteUser(Model model, @PathVariable(value = "user_id") int userId) {
@@ -94,6 +112,8 @@ public class HomeAdminController {
         model.addAttribute("errMsg", "Không thể xóa");
         return "users-manage";
     }
+    
+    
 
     //Quản lí giá
     @GetMapping("/price-manage")
@@ -146,6 +166,7 @@ public class HomeAdminController {
     }
 
     
+    
     //Quản lí xe khách
     @GetMapping("/coach-manage")
     public String coachManage(Model model) {
@@ -167,6 +188,25 @@ public class HomeAdminController {
         model.addAttribute("errMsg", "Có lỗi xảy ra");
         model.addAttribute("cates", this.categoryService.getCates(null));
         return "add-coach";
+    }
+    
+    @GetMapping("/coach-manage/update-coach/{coach_id}")
+    public String updateCoachView(Model model, @PathVariable(value = "coach_id") int coachId){
+        model.addAttribute("coach", this.coachService.getCoachById(coachId));
+        model.addAttribute("cates", this.categoryService.getCates(null));
+        return "update-coach";
+    }
+    
+    @PostMapping("/coach-manage/update-coach/{coach_id}")
+    public String updateCoachProcess(Model model, 
+            @ModelAttribute(value = "coach") Coach coach,
+            @PathVariable(value = "coach_id") int i) {
+        if(this.coachService.updateCoachByAdmin(coach, i) == true){
+            return "redirect:/admin/coach-manage";
+        }
+        model.addAttribute("errMsg", "Không thể sửa");
+        model.addAttribute("cates", this.categoryService.getCates(null));
+        return "update-coach";
     }
 
     @GetMapping("/coach-manage/delete/{coach_id}")
@@ -202,6 +242,25 @@ public class HomeAdminController {
         return "add-route";
     }
 
+    @GetMapping("/route-manage/update-route/{route_id}")
+    public String updateRouteView(Model model, @PathVariable(value = "route_id") int routeId){
+        model.addAttribute("route", this.routeService.getRouteById(routeId));
+        model.addAttribute("station", this.stationService.getStation(""));
+        return "update-route";
+    }
+    
+    @PostMapping("/route-manage/update-route/{route_id}")
+    public String updateRouteProcess(Model model, 
+            @ModelAttribute(value = "route") Route route,
+            @PathVariable(value = "route_id") int i) {
+        if(this.routeService.updateRouteByAdmin(route, i)){
+            return "redirect:/admin/route-manage";
+        }
+        model.addAttribute("errMsg", "Không thể sửa");
+        model.addAttribute("station", this.stationService.getStation(""));
+        return "update-route";
+    }
+    
     @GetMapping("/route-manage/delete/{route_id}")
     public String deleteRoute(Model model, @PathVariable(value = "route_id") int routeId) {
         Route r = this.routeService.getRouteById(routeId);

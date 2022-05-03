@@ -66,5 +66,10 @@ public class CoachServiceImpl implements CoachService{
     public boolean deleteCoach(Coach coach) {
         return this.coachRepository.deleteCoach(coach);
     }
+
+    @Override
+    public boolean updateCoachByAdmin(Coach coach, int i) {
+        return this.coachRepository.updateCoachByAdmin(coach, i);
+    }
     
 }

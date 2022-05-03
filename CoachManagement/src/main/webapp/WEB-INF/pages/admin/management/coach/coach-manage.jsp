@@ -114,7 +114,7 @@
                                         </c:choose>
                                     </td>
                                     <td class="text-right py-0 align-middle">
-                                        <a class="btn btn-info btn-sm" href="#">
+                                        <a class="btn btn-info btn-sm" href="<c:url value="/admin/coach-manage/update-coach/${lc.id}"/>">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Sửa

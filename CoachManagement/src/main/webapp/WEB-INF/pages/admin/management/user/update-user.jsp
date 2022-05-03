@@ -13,12 +13,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm xe khách</h1>
+                    <h1>Thêm người dùng</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Xe khách</li>
+                        <li class="breadcrumb-item active">Người dùng</li>
                     </ol>
                 </div>
             </div>
@@ -50,40 +50,51 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <c:url value="/admin/coach-manage/add-coach" var="action" />
-                    <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="coach">
+                    <c:url value="/admin/users-manage/update-user/${user.id}" var="action" />
+                    <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user">
                         <div class="form-group">
-                            <label for="name">Tên xe</label>
-                            <form:input type="text" id="name" path="name" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="licenseplates">Biển số</label>
-                            <form:input type="text" id="licenseplates" path="licenseplates" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Giá</label>
-                            <form:input type="number" id="price" path="price" placeholder="0" step="500" min="0" max="9999999999"  class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label for="describe">
-                                Mô tả
-                            </label>
-                            <form:textarea id="describe" path="describe" 
-                                           cssClass="form-control" />
+                            <label for="fullname">Họ tên</label>
+                            <form:input type="text" id="fullname" path="fullname" class="form-control" />
                         </div>
 
-                        <label for="file">Avatar</label>
-                        <div class="custom-file mb-3 form-group">   
-                            <form:input
-                                type="file"
-                                class="custom-file-input form-control"
-                                id="file"
-                                name="file"
-                                path="file"
-                                />
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <form:input type="text" id="phone" path="phone" class="form-control" />
                         </div>
-                            
+                        <div class="form-group">
+                            <label for="gender">Giới tính</label>
+                            <form:select
+                                id="gender"
+                                name="gender"
+                                class="custom-select mb-3 form-control"
+                                path="gender"
+                                >
+                                <form:option value="Nam" label="Nam"/>
+                                <form:option value="Nữ" label="Nữ"/>
+                            </form:select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Địa chỉ</label>
+                            <form:input type="text" id="address" path="address" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userRole">Phân quyền</label>
+                            <form:select
+                                name="userRole"
+                                class="custom-select mb-3 form-control"
+                                id="userRole"
+                                path="userRole"
+                                >
+                                <form:option value="ROLE_ADMIN" label="ADMIN" />
+                                <form:option value="ROLE_STAFF" label="STAFF" />
+                                <form:option value="ROLE_DRIVER" label="DRIVER" />
+                                <form:option value="ROLE_USER" label="USER" />
+                            </form:select>
+                        </div>
+
+
                         <div class="form-group">
                             <label for="active">Trạng thái</label>
                             <form:select
@@ -97,20 +108,9 @@
                             </form:select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="categoryId">
-                                Loại xe
-                            </label>
-                            <form:select path="categoryId" cssClass="form-control">
-                                <form:options items="${cates}"  
-                                              itemLabel="name" 
-                                              itemValue="id" />
-                            </form:select>
-                        </div>
-
                         <div class="row form-group">
                             <div class="col-12">
-                                <a href="<c:url value="/admin/coach-manage"/>" class="btn btn-secondary">Quay lại</a>
+                                <a href="<c:url value="/admin/users-manage"/>" class="btn btn-secondary">Quay lại</a>
                                 <input
                                     type="submit"
                                     value="Lưu thông tin"

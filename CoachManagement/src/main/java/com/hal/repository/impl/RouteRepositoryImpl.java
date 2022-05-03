@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -102,6 +103,20 @@ public class RouteRepositoryImpl implements RouteRepository {
             query = query.where(p);
         }
         return session.createQuery(query).getResultList();
+    }
+
+    @Override
+    public boolean updateRouteByAdmin(Route route, int routeId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaUpdate<Route> cu = builder.createCriteriaUpdate(Route.class);
+        Root root = cu.from(Route.class);
+        cu.set("name", route.getName());
+        cu.set("price", route.getPrice());
+        cu.set("startingpointId", route.getStartingpointId());
+        cu.set("destinationId", route.getDestinationId());
+        cu = cu.where(builder.equal(root.get("id").as(Integer.class), routeId));
+        return session.createQuery(cu).executeUpdate() > 0;
     }
 
 }

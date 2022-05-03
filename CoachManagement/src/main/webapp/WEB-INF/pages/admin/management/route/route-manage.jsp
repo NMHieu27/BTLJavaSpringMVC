@@ -106,7 +106,7 @@
                                     </td>
 
                                     <td class="text-right py-0 align-middle">
-                                        <a class="btn btn-info btn-sm" href="#">
+                                        <a class="btn btn-info btn-sm" href="<c:url value="/admin/route-manage/update-route/${r[0]}"/>">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Sửa

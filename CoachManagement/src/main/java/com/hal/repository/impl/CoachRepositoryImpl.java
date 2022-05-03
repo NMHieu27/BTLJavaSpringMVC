@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -76,6 +77,22 @@ public class CoachRepositoryImpl implements CoachRepository{
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean updateCoachByAdmin(Coach coach, int coachId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaUpdate <Coach> cu = builder.createCriteriaUpdate(Coach.class);
+        Root root = cu.from(Coach.class);
+        cu.set("name", coach.getName());
+        cu.set("licenseplates", coach.getLicenseplates());
+        cu.set("price", coach.getPrice());
+        cu.set("describe", coach.getDescribe());
+        cu.set("active", coach.getActive());
+        cu.set("categoryId", coach.getCategoryId());
+        cu = cu.where(builder.equal(root.get("id").as(Integer.class), coachId));
+        return session.createQuery(cu).executeUpdate() > 0;
     }
     
 }

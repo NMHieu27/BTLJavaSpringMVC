@@ -66,4 +66,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getUserByRole(role);
     }
 
+    @Override
+    public boolean updateUserByAdmin(User user, int i) {
+        return this.userRepository.updateUserByAdmin(user, i);
+    }
+
 }

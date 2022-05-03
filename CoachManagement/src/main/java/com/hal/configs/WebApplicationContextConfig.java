@@ -7,6 +7,11 @@ package com.hal.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.hal.formatter.LocationFormatter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -83,5 +88,10 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         source.setBasename("messages");
 
         return source;
+    }
+    
+    @Override
+    public void addFormatters(FormatterRegistry registry){
+        registry.addFormatter(new LocationFormatter());
     }
 }

@@ -55,9 +55,7 @@ public class Comment implements Serializable {
     @JoinColumn(name = "coaches_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Coaches coachesId;
-    @JoinColumns({
-        @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        @JoinColumn(name = "user_id", referencedColumnName = "id")})
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User user;
 
@@ -137,5 +135,5 @@ public class Comment implements Serializable {
     public String toString() {
         return "com.hal.pojo.Comment[ id=" + id + " ]";
     }
-    
+
 }

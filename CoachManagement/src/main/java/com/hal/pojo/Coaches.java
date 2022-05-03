@@ -4,7 +4,9 @@
  */
 package com.hal.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -22,6 +24,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -74,7 +77,7 @@ public class Coaches implements Serializable {
     @Column(name = "empty_seats")
     private int emptySeats;
     @Size(max = 500)
-    @Column(name = "describe")
+    @Column(name = "`describe`")
     private String describe;
     @Column(name = "unitprice")
     private Long unitprice;
@@ -100,6 +103,13 @@ public class Coaches implements Serializable {
     private Collection<Ticket> ticketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "coachesId")
     private Collection<Comment> commentCollection;
+
+    @Transient
+    @JsonIgnore
+    private String startDateString;
+    @Transient
+    @JsonIgnore
+    private String endDateString;
 
     public Coaches() {
     }
@@ -270,5 +280,33 @@ public class Coaches implements Serializable {
     public String toString() {
         return "com.hal.pojo.Coaches[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the startDateString
+     */
+    public String getStartDateString() {
+        return startDateString;
+    }
+
+    /**
+     * @param startDateString the startDateString to set
+     */
+    public void setStartDateString(String startDateString) {
+        this.startDateString = startDateString;
+    }
+
+    /**
+     * @return the endDateString
+     */
+    public String getEndDateString() {
+        return endDateString;
+    }
+
+    /**
+     * @param endDateString the endDateString to set
+     */
+    public void setEndDateString(String endDateString) {
+        this.endDateString = endDateString;
+    }
+
 }

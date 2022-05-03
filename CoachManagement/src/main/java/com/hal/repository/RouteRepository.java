@@ -4,17 +4,18 @@
  */
 package com.hal.repository;
 
-import com.hal.pojo.User;
+import com.hal.pojo.Route;
 import java.util.List;
 
 /**
  *
  * @author Asus
  */
-public interface UserRepository {
-    List<User> getUsers(String username);
-    boolean addUser(User user);
-    User getUserById(int userId);
-    boolean deleteUser(User user);
-    List<User> getUserByRole(String role);
+public interface RouteRepository {
+
+    List<Route> getRoutes(String kw);
+    List<Object[]> getRouteDetail(String name);
+    boolean addRoute(Route route);
+    Route getRouteById(int routeId);
+    boolean deleteRoute(Route route);
 }

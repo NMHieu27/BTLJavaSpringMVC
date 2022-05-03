@@ -49,7 +49,6 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")})
 public class User implements Serializable {
-
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String STAFF = "ROLE_STAFF";
     public static final String DRIVER = "ROLE_DRIVER";
@@ -105,14 +104,12 @@ public class User implements Serializable {
     private Collection<Ticket> ticketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<Comment> commentCollection;
-
     @Transient
     @JsonIgnore
     private MultipartFile file;
     @Transient
     @JsonIgnore
     private String confirmPassword;
-
     public User() {
     }
 
@@ -295,5 +292,5 @@ public class User implements Serializable {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
-
+    
 }

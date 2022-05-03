@@ -27,6 +27,7 @@ public class HomeAdminController {
         return "home-admin";
     }
     
+    //user management 
     @GetMapping("/users-manage")
     public String usersManage(Model model){
         model.addAttribute("users", this.userService.getUsers(null));
@@ -35,6 +36,7 @@ public class HomeAdminController {
     
     @GetMapping("/users-manage/add-user")
     public String addUserView(){
+      
         return "add-user";
     }
 }

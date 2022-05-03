@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CoachManagement" options="-endorseddirs C:\Users\Asus\OneDrive\Desktop\ACureForMe\BTLJavaSpringMVC\CoachManagement\target/endorsed" />
+      <module name="CoachManagement" options="-endorseddirs &quot;C:\Users\Asus\OneDrive\Desktop\FixBug - Copy\BTLJavaSpringMVC\CoachManagement\target/endorsed&quot;" />
     </option>
   </component>
 </project>

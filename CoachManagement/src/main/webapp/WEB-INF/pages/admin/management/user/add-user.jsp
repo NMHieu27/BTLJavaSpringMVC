@@ -34,6 +34,7 @@
             ${errMsg}
         </div>
     </c:if>
+  
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">

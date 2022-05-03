@@ -53,7 +53,7 @@ public class Pricechange implements Serializable {
     @NotNull
     @Column(name = "value")
     private BigDecimal value;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pricachangeId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pricechangeId")
     private Collection<Coaches> coachesCollection;
 
     public Pricechange() {

@@ -48,4 +48,5 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Thêm người dùng" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/user/add-user.jsp" />
     </definition>
+    
 </tiles-definitions>

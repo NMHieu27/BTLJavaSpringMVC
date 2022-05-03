@@ -32,17 +32,17 @@
 
     <!-- Main content -->
     <section class="content">
-        
+
         <div class="container-fluid">
-            
+
             <div class="d-flex p-0 text-white" style="margin-bottom: 10px">
                 <!-- <div class="p-2 bg-info">Flex item 1</div> -->
-                <a class="btn btn-success" href="#">
+                <a class="btn btn-success" href="<c:url value="/admin/users-manage/add-user"/>">
                     <i class="fas fa-plus-circle"></i>
                     Thêm
                 </a>
             </div>
-            
+
             <div class="card card-info">
                 <div class="card-header">
                     <h3 class="card-title">Người dùng</h3>
@@ -69,14 +69,17 @@
                                 <th style="width: 15%">
                                     Tài khoản
                                 </th>
-                                <th style="width: 15%">
-                                    Mật khẩu
+                                <th style="width: 12%">
+                                    Số điện thoại
                                 </th>
-                                <th style="width: 15%">
+                                <th style="width: 12%">
                                     Phân quyền
                                 </th>
-                                <th style="width:15%">
+                                <th style="width:10%">
                                     Avatar
+                                </th>
+                                <th style="width:10%">
+                                    Trạng thái
                                 </th>
                                 <th style="width: 15%">
                                 </th>
@@ -98,12 +101,12 @@
                                         <a>${u.username}</a>
                                         <br/>
                                         <small>
-                                            Created 01.01.2019
+                                            Created ${u.joinDate}
                                         </small>
                                     </td>
                                     <td>
                                         <div>
-                                            ${u.password}
+                                            ${u.phone}
                                         </div>
                                     </td>
 
@@ -122,6 +125,17 @@
                                             <c:when test="${u.avatar == null || u.avatar.startsWith('https') == false}">
                                                 <img class="table-avatar" src="<c:url value="/images/default.jpg" />" alt="Card image">
                                             </c:when>
+                                        </c:choose>
+                                    </td>
+                                    <td class="text-center">
+                                        <c:choose>
+                                            <c:when test="${u.active == true}">
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            </c:otherwise>
                                         </c:choose>
                                     </td>
                                     <td class="text-right py-0 align-middle">

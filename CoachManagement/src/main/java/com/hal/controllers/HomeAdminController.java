@@ -32,4 +32,9 @@ public class HomeAdminController {
         model.addAttribute("users", this.userService.getUsers(null));
         return "users-manage";
     }
+    
+    @GetMapping("/users-manage/add-user")
+    public String addUserView(){
+        return "add-user";
+    }
 }

@@ -14,12 +14,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.HibernateException;
+import com.hal.repository.CoachesRepository;
+import com.hal.service.CoachesService;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Asus
+ * @author Linh
+ */
  */
 @Service
 public class CoachesServiceImpl implements CoachesService {
@@ -69,4 +75,13 @@ public class CoachesServiceImpl implements CoachesService {
 
     }
 
+    @Override
+    public List<Object[]> getCoaches(int start, int end, Date startDate){
+        return this.coachesRepository.getCoaches(start, end, startDate);
+    }
+    
+    @Override
+    public List<Object[]> getCoachesById(int coachesId){
+        return this.coachesRepository.getCoachesById(coachesId);
+    }
 }

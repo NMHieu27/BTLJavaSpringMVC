@@ -1,27 +1,13 @@
 <%-- 
-    Document   : index
-    Created on : Apr 19, 2022, 12:16:58 AM
-    Author     : Asus
+    Document   : coaches-booking
+    Created on : May 2, 2022, 3:43:25 AM
+    Author     : Linh
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<header class="masthead text-white text-center" style="background-color: darkblue">
-    <div class="container d-flex align-items-center flex-column">
-        <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="<c:url value="resources/images/2.jpg"/>" alt="..." />
-        <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
-    </div>
-</header>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <div class="container d-flex justify-content-center align-items-center my-2">
     <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
         <div class="col-md-3">
@@ -50,3 +36,32 @@
         </div>
     </form>
 </div>
+<div>
+    <c:forEach var="c" items="${coaches}">
+        <div>
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="${c[9]}" class="rounded" alt="Ảnh xe">
+                </div>
+                <div class="col-md-10">
+                    <div>Tên xe: ${c[8]}</div>
+                    <div class="row">
+                        <div class="col-sm-7">Tên chuyến: ${c[0]}</div>
+                        <div class="col-md-5">Giá vé: ${c[4]}</div>
+                    </div>
+                    <div>Giờ bắt đầu: ${c[1]}</div>
+                    <div>Giờ dự kiến tới nơi: ${c[2]}</div>
+                    <div>Ghế trống: ${c[3]}</div>
+                    <div>Tuyến xe: ${c[5]}</div>
+                    <div>Trạm xuất phát: ${c[6]}</div>
+                    <div>Trạm kết thúc: ${c[7]}</div>
+					<div>
+                        <a href="<c:url value="/coaches-detail?coachId=${c[10]}&routeId=${c[11]}&coachesId=${c[12]}"/>">Xem thông tin</a>
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </c:forEach>
+</div>
+
+

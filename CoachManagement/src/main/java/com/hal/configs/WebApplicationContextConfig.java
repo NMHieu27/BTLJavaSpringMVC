@@ -7,16 +7,16 @@ package com.hal.configs;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.hal.formatter.LocationFormatter;
+import com.hal.formatter.CategoryFormatter;
+import com.hal.formatter.CoachFormatter;
+import com.hal.formatter.PriceChangeFormatter;
+import com.hal.formatter.RouteFormatter;
+import com.hal.formatter.StationFormatter;
+import com.hal.formatter.UserFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -52,18 +52,6 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
     }
 
-        @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "ddphodfop",
-                "api_key", "639657923925892",
-                "api_secret", "qUhE-fvxlzYeATpO5EtR5v6lG8M",
-                "secure", true
-        ));
-
-        return c;
-    }
-    
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -81,17 +69,25 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-
     @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-        source.setBasename("messages");
+    public Cloudinary cloudinary() {
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "ddphodfop",
+                "api_key", "639657923925892",
+                "api_secret", "qUhE-fvxlzYeATpO5EtR5v6lG8M",
+                "secure", true
+        ));
 
-        return source;
+        return c;
     }
-    
+
     @Override
-    public void addFormatters(FormatterRegistry registry){
-        registry.addFormatter(new LocationFormatter());
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new StationFormatter());
+        registry.addFormatter(new CategoryFormatter());
+        registry.addFormatter(new CoachFormatter());
+        registry.addFormatter(new PriceChangeFormatter());
+        registry.addFormatter(new RouteFormatter());
+        registry.addFormatter(new UserFormatter());
     }
 }

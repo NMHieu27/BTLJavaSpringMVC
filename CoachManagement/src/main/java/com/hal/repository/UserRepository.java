@@ -14,4 +14,8 @@ import java.util.List;
 public interface UserRepository {
     List<User> getUsers(String username);
     boolean addUser(User user);
+    User getUserById(int userId);
+    boolean deleteUser(User user);
+    List<User> getUserByRole(String role);
+    boolean updateUserByAdmin(User user, int userId);
 }

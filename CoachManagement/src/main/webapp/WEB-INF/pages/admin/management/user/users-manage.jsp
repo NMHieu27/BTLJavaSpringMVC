@@ -28,14 +28,19 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    
+    <c:if test="${errMsg != null}">
+        <div class="alert alert-danger mx-3">
+            ${errMsg}
+        </div>
+    </c:if>
 
     <!-- Main content -->
     <section class="content">
 
         <div class="container-fluid">
 
-            <div class="d-flex p-0 text-white" style="margin-bottom: 10px">
+            <div class="d-flex p-0 text-white my-2">
                 <!-- <div class="p-2 bg-info">Flex item 1</div> -->
                 <a class="btn btn-success" href="<c:url value="/admin/users-manage/add-user"/>">
                     <i class="fas fa-plus-circle"></i>
@@ -45,7 +50,7 @@
 
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Người dùng</h3>
+                    <h3 class="card-title">Danh sách người dùng</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -57,7 +62,7 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <table class="table table-striped projects">
+                    <table class="table table-striped projects text-center">
                         <thead>
                             <tr>
                                 <th style="width: 5% ">
@@ -127,7 +132,7 @@
                                             </c:when>
                                         </c:choose>
                                     </td>
-                                    <td class="text-center">
+                                    <td>
                                         <c:choose>
                                             <c:when test="${u.active == true}">
                                                 <i class="fas fa-check-circle text-success"></i>
@@ -139,12 +144,14 @@
                                         </c:choose>
                                     </td>
                                     <td class="text-right py-0 align-middle">
-                                        <a class="btn btn-info btn-sm" href="#">
+                                        <a class="btn btn-info btn-sm" href="<c:url value="/admin/users-manage/update-user/${u.id}"/>">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Sửa
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href="#">
+                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) {
+                                                    return false
+                                                }" href="<c:url value="/admin/users-manage/delete/${u.id}"/>">
                                             <i class="fas fa-trash">
                                             </i>
                                             Xóa

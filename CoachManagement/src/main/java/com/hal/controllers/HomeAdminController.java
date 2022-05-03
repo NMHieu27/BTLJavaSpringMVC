@@ -4,15 +4,12 @@
  */
 package com.hal.controllers;
 
-import com.hal.pojo.User;
 import com.hal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -38,22 +35,7 @@ public class HomeAdminController {
     }
     
     @GetMapping("/users-manage/add-user")
-    public String addUserView(Model model){
-        model.addAttribute("user", new User());
-        return "add-user";
-    }
-    
-    @PostMapping("/users-manage/add-user")
-    public String addUser(Model model, @ModelAttribute(value = "user") User user){
-        if(user.getPassword().isEmpty()){
-            model.addAttribute("errMsg", "Vui lòng nhập mật khẩu");
-        }
-        else{
-            if(this.userService.addUser(user) == true){
-                return "redirect:/users-manage";
-            }
-            model.addAttribute("errMsg", "Có lỗi xảy ra");
-        }
+    public String addUserView(){
       
         return "add-user";
     }

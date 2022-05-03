@@ -51,6 +51,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/price/add-price.jsp" />
     </definition>
     
+    <definition name="update-price" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí giá" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/price/update-price.jsp" />
+    </definition>
+    
     <!--Xe khách-->
     <definition name="coach-manage" extends="baseAdmin">
         <put-attribute name="title" value="Quản lí xe khách" />
@@ -63,8 +68,13 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     
     <!--Các chuyến xe-->
     <definition name="coaches-manage" extends="baseAdmin">
-        <put-attribute name="title" value="Quản lí xe khách" />
+        <put-attribute name="title" value="Quản lí chuyến xe" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/coaches/coaches-manage.jsp" />
+    </definition>
+    
+    <definition name="add-coaches" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí chuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/coaches/add-coaches.jsp" />
     </definition>
     
     <!--Tuyến xe-->

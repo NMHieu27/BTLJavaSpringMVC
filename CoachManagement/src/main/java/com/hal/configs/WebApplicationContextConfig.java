@@ -8,7 +8,11 @@ package com.hal.configs;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.hal.formatter.CategoryFormatter;
+import com.hal.formatter.CoachFormatter;
+import com.hal.formatter.PriceChangeFormatter;
+import com.hal.formatter.RouteFormatter;
 import com.hal.formatter.StationFormatter;
+import com.hal.formatter.UserFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -81,5 +85,9 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new StationFormatter());
         registry.addFormatter(new CategoryFormatter());
+        registry.addFormatter(new CoachFormatter());
+        registry.addFormatter(new PriceChangeFormatter());
+        registry.addFormatter(new RouteFormatter());
+        registry.addFormatter(new UserFormatter());
     }
 }

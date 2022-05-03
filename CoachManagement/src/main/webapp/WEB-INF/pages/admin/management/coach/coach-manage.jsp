@@ -28,7 +28,11 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    <c:if test="${errMsg != null}">
+        <div class="alert alert-danger mx-3">
+            ${errMsg}
+        </div>
+    </c:if>
 
     <!-- Main content -->
     <section class="content">
@@ -115,7 +119,9 @@
                                             </i>
                                             Sửa
                                         </a>
-                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) { return false }" href="<c:url value="/admin/coach-manage/delete/${lc.id}"/>">
+                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) {
+                                                    return false
+                                                }" href="<c:url value="/admin/coach-manage/delete/${lc.id}"/>">
                                             <i class="fas fa-trash">
                                             </i>
                                             Xóa

@@ -54,12 +54,12 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         predicates.add(builder.equal(rootCoaches.get("routeId"), rootRoute.get("id")));
         predicates.add(builder.equal(rootCoaches.get("driverId"), rootUser.get("id")));
         predicates.add(builder.equal(rootCoaches.get("coachId"), rootCoach.get("id")));
-        predicates.add(builder.equal(rootCoaches.get("pricachangeId"), rootPrice.get("id")));
+        predicates.add(builder.equal(rootCoaches.get("pricechangeId"), rootPrice.get("id")));
 
         query.multiselect(rootCoaches.get("id"), rootCoaches.get("name"),
                 rootCoaches.get("startTime"), rootCoaches.get("endTime"),
                 rootCoaches.get("emptySeats"), rootCoaches.get("describe"),
-                rootCoaches.get("price"), rootCoaches.get("isStarted"),
+                rootCoaches.get("unitprice"), rootCoaches.get("isStarted"),
                 rootCoaches.get("isCanceled"), rootRoute.get("name"),
                 rootUser.get("fullname"), rootCoach.get("name"), rootPrice.get("name"));
         query.where(predicates.toArray(new Predicate[]{}));
@@ -80,6 +80,18 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.delete(coaches);
+            return true;
+        } catch (HibernateException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addCoaches(Coaches coaches) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(coaches);
             return true;
         } catch (HibernateException ex) {
             System.out.println(ex.getMessage());

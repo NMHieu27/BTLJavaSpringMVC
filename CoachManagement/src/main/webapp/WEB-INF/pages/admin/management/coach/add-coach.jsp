@@ -26,7 +26,7 @@
         <!-- /.container-fluid -->
     </section>
     <c:if test="${errMsg != null}">
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mx-3">
             ${errMsg}
         </div>
     </c:if>

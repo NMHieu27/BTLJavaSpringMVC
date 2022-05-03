@@ -44,7 +44,6 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByFullname", query = "SELECT u FROM User u WHERE u.fullname = :fullname"),
     @NamedQuery(name = "User.findByGender", query = "SELECT u FROM User u WHERE u.gender = :gender"),
     @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address"),
-    @NamedQuery(name = "User.findByYearofbirth", query = "SELECT u FROM User u WHERE u.yearofbirth = :yearofbirth"),
     @NamedQuery(name = "User.findByJoinDate", query = "SELECT u FROM User u WHERE u.joinDate = :joinDate"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
@@ -69,7 +68,7 @@ public class User implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 20)
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
@@ -87,15 +86,12 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "address")
     private String address;
-    @Column(name = "yearofbirth")
-    @Temporal(TemporalType.DATE)
-    private Date yearofbirth;
     @Column(name = "join_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinDate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 12)
     @Column(name = "user_role")
     private String userRole;
     @Size(max = 100)
@@ -186,14 +182,6 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Date getYearofbirth() {
-        return yearofbirth;
-    }
-
-    public void setYearofbirth(Date yearofbirth) {
-        this.yearofbirth = yearofbirth;
     }
 
     public Date getJoinDate() {

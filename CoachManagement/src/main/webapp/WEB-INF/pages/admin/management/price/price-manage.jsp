@@ -30,6 +30,11 @@
     </div>
     <!-- /.content-header -->
 
+    <c:if test="${errMsg != null}">
+        <div class="alert alert-danger mx-3">
+            ${errMsg}
+        </div>
+    </c:if>
 
     <!-- Main content -->
     <section class="content">
@@ -93,12 +98,14 @@
                                     </td>
 
                                     <td class="text-right py-0 align-middle">
-                                        <a class="btn btn-info btn-sm" href="#">
+                                        <a class="btn btn-info btn-sm" href="<c:url value="/admin/price-manage/update-price/${p.id}"/>">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Sửa
                                         </a>
-                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) { return false }" href="<c:url value="/admin/price-manage/delete/${p.id}"/>">
+                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) {
+                                                    return false
+                                                }" href="<c:url value="/admin/price-manage/delete/${p.id}"/>">
                                             <i class="fas fa-trash">
                                             </i>
                                             Xóa

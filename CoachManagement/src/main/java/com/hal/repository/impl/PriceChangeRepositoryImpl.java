@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -47,9 +48,15 @@ public class PriceChangeRepositoryImpl implements PriceChangeRepository {
     }
 
     @Override
-    public void addPrice(Pricechange pricechange) {
+    public boolean addPrice(Pricechange pricechange) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        session.save(pricechange);
+        try{
+            session.save(pricechange);
+            return true;
+        }catch(HibernateException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @Override
@@ -71,6 +78,19 @@ public class PriceChangeRepositoryImpl implements PriceChangeRepository {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean updatePrice(Pricechange pricechange, int priceId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaUpdate<Pricechange> cu = builder.createCriteriaUpdate(Pricechange.class);
+        Root root = cu.from(Pricechange.class);
+        cu.set("name", pricechange.getName());
+        cu.set("value", pricechange.getValue());
+        cu.where(builder.equal(root.get("id").as(Integer.class), priceId));
+        
+        return session.createQuery(cu).executeUpdate() > 0;
     }
 
 }

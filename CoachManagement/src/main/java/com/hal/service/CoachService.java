@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface CoachService {
     List<Coach> getCoach(String name);
-    void addCoach(Coach coach);
+    boolean addCoach(Coach coach);
     Coach getCoachById(int coachId);
     boolean deleteCoach(Coach coach);
 }

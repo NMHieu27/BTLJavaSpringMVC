@@ -110,11 +110,31 @@ public class HomeAdminController {
 
     @PostMapping("/price-manage/add-price")
     public String addPriceProcess(Model model, @ModelAttribute(value = "price") Pricechange pricechange) {
-        this.priceChangeService.addPrice(pricechange);
-        return "redirect:/admin/price-manage";
-
+        if(this.priceChangeService.addPrice(pricechange) == true)
+            return "redirect:/admin/price-manage";
+        model.addAttribute("errMsg", "Có lỗi xảy ra");
+        return "add-price";
+    }
+    
+    
+    @GetMapping("/price-manage/update-price/{price_id}")
+    public String updatePriceView(Model model, @PathVariable(value = "price_id") int priceId){
+        model.addAttribute("price", this.priceChangeService.getPriceById(priceId));
+        return "update-price";
+    }
+    
+    @PostMapping("/price-manage/update-price/{price_id}")
+    public String updatePriceProcess(Model model, 
+            @ModelAttribute(value = "price") Pricechange pricechange,
+            @PathVariable(value = "price_id") int i) {
+        if(this.priceChangeService.updatePrice(pricechange, i) == true){
+            return "redirect:/admin/price-manage";
+        }
+        model.addAttribute("errMsg", "Không thể sửa");
+        return "update-price";
     }
 
+    
     @GetMapping("/price-manage/delete/{price_id}")
     public String deletePrice(Model model, @PathVariable(value = "price_id") int priceId) {
         Pricechange p = this.priceChangeService.getPriceById(priceId);
@@ -125,6 +145,7 @@ public class HomeAdminController {
         return "price-manage";
     }
 
+    
     //Quản lí xe khách
     @GetMapping("/coach-manage")
     public String coachManage(Model model) {
@@ -141,8 +162,11 @@ public class HomeAdminController {
 
     @PostMapping("/coach-manage/add-coach")
     public String addCoachProcess(Model model, @ModelAttribute(value = "coach") Coach coach) {
-        this.coachService.addCoach(coach);
-        return "redirect:/admin/coach-manage";
+        if(this.coachService.addCoach(coach) == true)
+            return "redirect:/admin/coach-manage";
+        model.addAttribute("errMsg", "Có lỗi xảy ra");
+        model.addAttribute("cates", this.categoryService.getCates(null));
+        return "add-coach";
     }
 
     @GetMapping("/coach-manage/delete/{coach_id}")
@@ -171,9 +195,11 @@ public class HomeAdminController {
 
     @PostMapping("/route-manage/add-route")
     public String addRouteProcess(Model model, @ModelAttribute(value = "route") Route route) {
-        this.routeService.addRoute(route);
-        return "redirect:/admin/route-manage";
-
+        if(this.routeService.addRoute(route) == true)
+            return "redirect:/admin/route-manage";
+        model.addAttribute("errMsg", "Có lỗi xảy ra");
+        model.addAttribute("station", this.stationService.getStation(""));
+        return "add-route";
     }
 
     @GetMapping("/route-manage/delete/{route_id}")
@@ -192,6 +218,29 @@ public class HomeAdminController {
         model.addAttribute("Coaches", this.coachesService.getCoaches(null));
         return "coaches-manage";
     }
+    
+    @GetMapping("/coaches-manage/add-coaches")
+    public String addCoachesView(Model model){
+        model.addAttribute("coaches", new Coaches());
+        model.addAttribute("listRoute", this.routeService.getRoutes(null));
+        model.addAttribute("listCoach", this.coachService.getCoach(null));
+        model.addAttribute("listDriver", this.userService.getUserByRole(User.DRIVER));
+        model.addAttribute("listPriceChange", this.priceChangeService.getPriceChange(null));
+        return "add-coaches";
+    }
+    
+    @PostMapping("/coaches-manage/add-coaches")
+    public String addCoachesProocess(Model model, @ModelAttribute(value = "coaches") Coaches coaches) {
+        if(this.coachesService.addCoaches(coaches) == true)
+            return "redirect:/admin/coaches-manage";
+        model.addAttribute("listRoute", this.routeService.getRoutes(null));
+        model.addAttribute("listCoach", this.coachService.getCoach(null));
+        model.addAttribute("listDriver", this.userService.getUserByRole(User.DRIVER));
+        model.addAttribute("listPriceChange", this.priceChangeService.getPriceChange(null));
+        model.addAttribute("errMsg", "Lỗi");
+        return "add-coaches";
+    }
+    
 
     @GetMapping("/coaches-manage/delete/{coaches_id}")
     public String deleteCoaches(Model model, @PathVariable(value = "coaches_id") int coachesId) {

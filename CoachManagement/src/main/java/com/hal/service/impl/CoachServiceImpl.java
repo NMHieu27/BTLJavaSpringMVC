@@ -36,7 +36,7 @@ public class CoachServiceImpl implements CoachService{
     }
 
     @Override
-    public void addCoach(Coach coach) {
+    public boolean addCoach(Coach coach) {
         System.out.println("Mô tả:" + coach.getDescribe());
         System.out.println(coach.getActive());
         System.out.println(coach.getName());
@@ -54,7 +54,7 @@ public class CoachServiceImpl implements CoachService{
                 Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        this.coachRepository.addCoach(coach);
+        return this.coachRepository.addCoach(coach);
     }
 
     @Override

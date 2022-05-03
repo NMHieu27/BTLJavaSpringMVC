@@ -66,7 +66,7 @@ public class Coach implements Serializable {
     @Column(name = "price")
     private long price;
     @Size(max = 500)
-    @Column(name = "`describe`")
+    @Column(name = "describe")
     private String describe;
     @Size(max = 100)
     @Column(name = "image")
@@ -78,6 +78,7 @@ public class Coach implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
+
     @Transient
     @JsonIgnore
     private MultipartFile file;

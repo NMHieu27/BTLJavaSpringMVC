@@ -58,9 +58,15 @@ public class RouteRepositoryImpl implements RouteRepository {
     }
 
     @Override
-    public void addRoute(Route route) {
+    public boolean addRoute(Route route) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        session.save(route);
+        try{
+            session.save(route);
+            return true;
+        }catch(HibernateException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @Override
@@ -82,6 +88,20 @@ public class RouteRepositoryImpl implements RouteRepository {
             System.out.println(ex);
         }
         return false;
+    }
+
+    @Override
+    public List<Route> getRoutes(String kw) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Route> query = builder.createQuery(Route.class);
+        Root root  =query.from(Route.class);
+        
+        if(kw != null){
+            Predicate p = builder.like(root.get("name").as(String.class), kw.trim());
+            query = query.where(p);
+        }
+        return session.createQuery(query).getResultList();
     }
 
 }

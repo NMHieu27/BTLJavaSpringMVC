@@ -27,8 +27,8 @@ public class PriceChangeServiceImpl implements PriceChangeService {
     }
 
     @Override
-    public void addPrice(Pricechange prchng) {
-        this.priceChangeRepository.addPrice(prchng);
+    public boolean addPrice(Pricechange prchng) {
+        return this.priceChangeRepository.addPrice(prchng);
     }
 
     @Override
@@ -39,6 +39,11 @@ public class PriceChangeServiceImpl implements PriceChangeService {
     @Override
     public boolean deletePrice(Pricechange prchng) {
         return this.priceChangeRepository.deletePrice(prchng);
+    }
+
+    @Override
+    public boolean updatePrice(Pricechange prchng, int priceId) {
+        return this.priceChangeRepository.updatePrice(prchng, priceId);
     }
 
 

@@ -28,7 +28,11 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    <c:if test="${errMsg != null}">
+        <div class="alert alert-danger mx-3">
+            ${errMsg}
+        </div>
+    </c:if>
 
     <!-- Main content -->
     <section class="content">
@@ -100,14 +104,16 @@
                                     <td>
                                         <a>${r[4]}</a>
                                     </td>
-                                    
+
                                     <td class="text-right py-0 align-middle">
                                         <a class="btn btn-info btn-sm" href="#">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Sửa
                                         </a>
-                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) { return false }" href="<c:url value="/admin/route-manage/delete/${r[0]}"/>">
+                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) {
+                                                    return false
+                                                }" href="<c:url value="/admin/route-manage/delete/${r[0]}"/>">
                                             <i class="fas fa-trash">
                                             </i>
                                             Xóa

@@ -46,9 +46,15 @@ public class CoachRepositoryImpl implements CoachRepository{
     }
 
     @Override
-    public void addCoach(Coach coach) {
+    public boolean addCoach(Coach coach) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        session.save(coach);
+        try{
+            session.save(coach);
+            return true;
+        }catch(HibernateException ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @Override

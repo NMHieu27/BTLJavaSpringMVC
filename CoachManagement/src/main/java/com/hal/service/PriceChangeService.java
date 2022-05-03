@@ -13,7 +13,8 @@ import java.util.List;
  */
 public interface PriceChangeService {
     List<Pricechange> getPriceChange(String name);
-    void addPrice(Pricechange pricechange);
+    boolean addPrice(Pricechange pricechange);
     Pricechange getPriceById(int id);
     boolean deletePrice(Pricechange pricechange);
+    boolean updatePrice(Pricechange pricechange, int priceId);
 }

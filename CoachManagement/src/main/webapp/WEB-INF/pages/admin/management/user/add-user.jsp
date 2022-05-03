@@ -26,7 +26,7 @@
         <!-- /.container-fluid -->
     </section>
     <c:if test="${errMsg != null}">
-        <div class="alert alert-danger">
+        <div class="alert alert-danger mx-3">
             ${errMsg}
         </div>
     </c:if>
@@ -89,11 +89,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="yearofbirth">Ngày sinh</label>
-                            <form:input type="date" name="yearofbirth" path="yearofbirth" class="form-control" />
-                        </div>
-
-                        <div class="form-group">
                             <label for="userRole">Phân quyền</label>
                             <form:select
                                 name="userRole"
@@ -101,10 +96,10 @@
                                 id="userRole"
                                 path="userRole"
                                 >
-                                <form:option value="ADMIN" label="ADMIN" />
-                                <form:option value="STAFF" label="STAFF" />
-                                <form:option value="DRIVER" label="DRIVER" />
-                                <form:option value="USER" label="USER" />
+                                <form:option value="ROLE_ADMIN" label="ADMIN" />
+                                <form:option value="ROLE_STAFF" label="STAFF" />
+                                <form:option value="ROLE_DRIVER" label="DRIVER" />
+                                <form:option value="ROLE_USER" label="USER" />
                             </form:select>
                         </div>
 

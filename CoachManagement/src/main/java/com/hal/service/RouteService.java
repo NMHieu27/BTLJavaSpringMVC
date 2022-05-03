@@ -12,8 +12,9 @@ import java.util.List;
  * @author Asus
  */
 public interface RouteService {
+    List<Route> getRoutes(String kw);
     List<Object[]> getRouteDetail(String name);
-    void addRoute(Route route);
+    boolean addRoute(Route route);
     Route getRouteById(int routeId);
     boolean deleteRoute(Route route);
 }

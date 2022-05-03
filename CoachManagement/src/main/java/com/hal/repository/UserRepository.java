@@ -16,4 +16,5 @@ public interface UserRepository {
     boolean addUser(User user);
     User getUserById(int userId);
     boolean deleteUser(User user);
+    List<User> getUserByRole(String role);
 }

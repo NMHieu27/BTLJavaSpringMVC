@@ -28,9 +28,9 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void addRoute(Route route) {
+    public boolean addRoute(Route route) {
         System.out.println(route.getDestinationId());
-        this.routeRepository.addRoute(route);
+        return this.routeRepository.addRoute(route);
     }
 
     @Override
@@ -41,6 +41,11 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public boolean deleteRoute(Route route) {
         return this.routeRepository.deleteRoute(route);
+    }
+
+    @Override
+    public List<Route> getRoutes(String string) {
+        return this.routeRepository.getRoutes(string);
     }
 
 }

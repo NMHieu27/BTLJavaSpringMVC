@@ -29,6 +29,11 @@
     </div>
     <!-- /.content-header -->
 
+    <c:if test="${errMsg != null}">
+        <div class="alert alert-danger mx-3">
+            ${errMsg}
+        </div>
+    </c:if>
 
     <!-- Main content -->
     <section class="content">
@@ -77,7 +82,7 @@
                                     Tài xế
                                 </th>
                                 <th style="width: 10%">
-                                    Giá
+                                    Giá gốc
                                 </th>
                                 <th style="width: 10%">
                                     Đã chạy
@@ -145,7 +150,9 @@
                                             </i>
                                             Sửa
                                         </a>
-                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) { return false }" href="<c:url value="/admin/coaches-manage/delete/${c[0]}"/>">
+                                        <a class="btn btn-danger btn-sm" onclick="if (!confirm('Bạn có chắc chắn muốn xóa?')) {
+                                                    return false
+                                                }" href="<c:url value="/admin/coaches-manage/delete/${c[0]}"/>">
                                             <i class="fas fa-trash">
                                             </i>
                                             Xóa

@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface CoachesRepository {
     List<Object[]> getCoaches(String name);
+    boolean addCoaches(Coaches coaches);
     Coaches getCoachesById(int coachesId);
     boolean deleteCoaches(Coaches coaches);
+    
 }

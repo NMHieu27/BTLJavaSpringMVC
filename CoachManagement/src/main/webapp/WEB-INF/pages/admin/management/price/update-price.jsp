@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm giá thay đổi</h1>
+                    <h1>Sửa giá thay đổi</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <c:url value="/admin/price-manage/add-price" var="action" />
+                    <c:url value="/admin/price-manage/update-price/${price.id}" var="action" />
                     <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="price">
                         <div class="form-group">
                             <label for="name">Tên loại giá thay đổi</label>

@@ -10,8 +10,6 @@ import com.cloudinary.utils.ObjectUtils;
 import com.hal.pojo.User;
 import com.hal.repository.UserRepository;
 import com.hal.service.UserService;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -40,13 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(User user) {
-        try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(user.getYearofbirth()));
-            user.setYearofbirth(date);
-        } catch (ParseException ex) {
-            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        user.setJoinDate(new Date());
         if (user.getFile() != null) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
@@ -67,6 +59,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(User user) {
         return this.userRepository.deleteUser(user);
+    }
+
+    @Override
+    public List<User> getUserByRole(String role) {
+        return this.userRepository.getUserByRole(role);
     }
 
 }

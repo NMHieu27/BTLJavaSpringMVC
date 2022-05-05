@@ -8,6 +8,8 @@ import com.hal.pojo.Coach;
 import com.hal.pojo.Coaches;
 import com.hal.pojo.Pricechange;
 import com.hal.pojo.Route;
+import com.hal.pojo.Station;
+import com.hal.pojo.Ticket;
 import com.hal.pojo.User;
 import com.hal.repository.CoachesRepository;
 import java.util.ArrayList;
@@ -191,8 +193,6 @@ public class CoachesRepositoryImpl implements CoachesRepository {
                 rootCoaches.get("name"),
                 rootCoaches.get("startTime"),
                 rootCoaches.get("endTime"),
-                rootCoaches.get("emptySeats"),
-                rootCoaches.get("pricechange"),
                 rootRoute.get("name"),
                 rootSationStart.get("name"),
                 rootStationEnd.get("name"),
@@ -201,6 +201,42 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         );
 
         query.where(predicates.toArray(new Predicate[]{}));
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Object[]> getCoachesDetailsByUser(int userId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rootCoaches = query.from(Coaches.class);
+        Root rootRoute = query.from(Route.class);
+        Root rootCoach = query.from(Coach.class);
+        Root rootTicket = query.from(Ticket.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootTicket.get("userId"), userId));
+        predicates.add(builder.equal(rootCoaches.get("id"), rootTicket.get("coachesId")));
+        predicates.add(builder.equal(rootCoaches.get("routeId"), rootRoute.get("id")));
+        predicates.add(builder.equal(rootCoaches.get("coachId"), rootCoach.get("id")));     
+
+        query.multiselect(
+                rootTicket.get("id"),
+                rootTicket.get("price"),
+                rootCoaches.get("name"),
+                rootCoaches.get("startTime"),
+                rootCoaches.get("endTime"),
+                rootRoute.get("name"),
+                rootCoach.get("name"),
+                rootCoach.get("image"),
+                rootCoach.get("id"),
+                rootCoaches.get("id"),
+                rootRoute.get("id")
+                );
+
+        query.where(predicates.toArray(new Predicate[] {}));
         Query q = session.createQuery(query);
         return q.getResultList();
     }

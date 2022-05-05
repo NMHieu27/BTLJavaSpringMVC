@@ -52,12 +52,17 @@ public class HomeController {
         int destination = 2;
         Date startDate = new Date();
         if (null != request.getQueryString()) {
-            startDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
+            if (startDate.before(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")))){
+                startDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
+            }
             start = Integer.parseInt(request.getParameter("start"));
             destination = Integer.parseInt(request.getParameter("destination"));
         }
         model.addAttribute("location", this.locationService.getLocations(null));
         model.addAttribute("coaches", this.coachesService.getCoachesDetails(start, destination, startDate));
+        model.addAttribute("startId", request.getParameter("start"));
+        model.addAttribute("destination", request.getParameter("destination"));
+        model.addAttribute("date",  new SimpleDateFormat("yyyy-MM-dd").format(startDate));
         return "coaches-booking";
     }
 
@@ -69,5 +74,11 @@ public class HomeController {
             model.addAttribute("coachesId", Integer.parseInt(request.getParameter("coachesId")));
         }
         return "coaches-detail";
+    }
+    
+    @GetMapping("user-booking-history")
+    public String getUserBookingHistory(Model model, HttpServletRequest request) {
+            model.addAttribute("tickets", this.coachesService.getCoachesDetailsByUser(6));
+        return "user-booking-history";
     }
 }

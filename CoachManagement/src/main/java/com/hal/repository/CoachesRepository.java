@@ -21,4 +21,5 @@ public interface CoachesRepository {
     
     List<Object[]> getCoachesDetails(int start, int end, Date startDate);
     List<Object[]> getCoachesDetailsById(int coachesId);
+    List<Object[]> getCoachesDetailsByUser(int userId);
 }

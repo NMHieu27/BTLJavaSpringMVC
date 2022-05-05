@@ -19,6 +19,7 @@
     </head>
     <body>
 
+
         <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
             <ul class="navbar-nav">
                 <li class="nav-item active">
@@ -26,6 +27,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/coaches-booking"/>">Đặt vé xe</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/user-booking-history"/>">Xem lịch sử</a>
                 </li>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li class="nav-item">

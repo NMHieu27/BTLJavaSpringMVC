@@ -30,7 +30,7 @@ public class TicketServiceImpl implements TicketService{
     @Autowired
     private UserRepository userRepository;
     @Override
-    public boolean addTicket(int coachesId, String phone, String fullname, String email, long price) {
+    public Ticket addTicket(int coachesId, String phone, String fullname, String email, long price) {
         Coaches coaches = this.coachesRepository.getCoachesById(coachesId);
         User user = this.userRepository.getUserById(6);
         

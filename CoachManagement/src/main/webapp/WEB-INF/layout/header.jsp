@@ -27,6 +27,9 @@
     <li class="nav-item">
         <a class="nav-link" href="<c:url value="/coaches-booking"/>">Đặt vé xe</a>
     </li>
+	<li class="nav-item">
+        <a class="nav-link" href="<c:url value="/user-booking-history"/>">Xem lịch sử</a>
+    </li>
   </ul>
 </nav>
 

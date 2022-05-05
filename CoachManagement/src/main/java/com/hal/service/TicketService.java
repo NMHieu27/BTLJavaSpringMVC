@@ -5,10 +5,12 @@
  */
 package com.hal.service;
 
+import com.hal.pojo.Ticket;
+
 /**
  *
  * @author Linh
  */
 public interface TicketService {
-    boolean addTicket(int coachesId, String phone, String fullname, String email, long price);
+    Ticket addTicket(int coachesId, String phone, String fullname, String email, long price);
 }

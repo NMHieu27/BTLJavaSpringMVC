@@ -4,6 +4,7 @@
  */
 package com.hal.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -68,9 +69,11 @@ public class Ticket implements Serializable {
     private String email;
     @Column(name = "price")
     private Long price;
+    @JsonIgnore
     @JoinColumn(name = "coaches_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Coaches coachesId;
+    @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;

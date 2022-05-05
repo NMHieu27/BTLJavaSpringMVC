@@ -26,14 +26,14 @@ public class TicketRepositoryImpl implements TicketRepository{
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public boolean addTicket(Ticket ticket) {
+    public Ticket addTicket(Ticket ticket) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(ticket);
-            return true;
+            return ticket;
         } catch (HibernateException ex) {
             System.out.println(ex.getMessage());
         }
-        return false;
+        return null;
     }    
 }

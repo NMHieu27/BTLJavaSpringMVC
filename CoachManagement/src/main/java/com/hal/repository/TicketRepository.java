@@ -12,5 +12,5 @@ import com.hal.pojo.Ticket;
  * @author Linh
  */
 public interface TicketRepository {
-    boolean addTicket(Ticket ticket);
+    Ticket addTicket(Ticket ticket);
 }

@@ -78,4 +78,9 @@ public class CoachesServiceImpl implements CoachesService {
     public List<Object[]> getCoachesDetailsById(int coachesId){
         return this.coachesRepository.getCoachesDetailsById(coachesId);
     }
+    
+    @Override
+    public List<Object[]> getCoachesDetailsByUser(int userId){
+        return this.coachesRepository.getCoachesDetailsByUser(userId);
+    }
 }

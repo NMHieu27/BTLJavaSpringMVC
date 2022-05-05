@@ -5,8 +5,8 @@
  */
 package com.hal.controllers;
 
-import com.hal.pojo.Comment;
-import com.hal.service.CommentService;
+import com.hal.pojo.Ticket;
+import com.hal.service.TicketService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,23 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Linh
  */
 @RestController
-public class ApiCommentController {
+public class ApiTicketController {
     @Autowired
-    private CommentService commentService;
+    private TicketService ticketService;
     
-    @PostMapping(path = "api/add-comment", produces = {
+    @PostMapping(path = "api/add-ticket", produces = {
         MediaType.APPLICATION_JSON_VALUE
     })
-    public ResponseEntity<Comment> addComment(@RequestBody Map<String, String> params) {
+    public ResponseEntity<Ticket> addComment(@RequestBody Map<String, String> params) {
         try {
-            String content = params.get("content");
+            String fullname = params.get("fullname");
+            String email = params.get("email");
+            String phone = params.get("phone");
             int coachesId = Integer.parseInt(params.get("coachesId"));
+            long price = Long.parseLong(params.get("price"));
             
-            Comment c = this.commentService.addComment(content, coachesId);
-            Comment d = new Comment();
-            d.setContent(c.getContent());
-            d.setCreatedDate(c.getCreatedDate());
-            return new ResponseEntity<>(d, HttpStatus.CREATED);
+            Ticket ticket = this.ticketService.addTicket(coachesId, phone, fullname, email, price);
+            System.out.println(ticket.getCreatedDate());
+            return new ResponseEntity<>(ticket, HttpStatus.CREATED);
         } catch (Exception ex){
             ex.printStackTrace();
         }

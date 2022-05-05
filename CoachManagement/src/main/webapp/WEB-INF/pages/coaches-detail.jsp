@@ -12,20 +12,18 @@
     <div>
         <div class="row">
             <div class="col-md-2">
-                <img src="${coa[9]}" class="rounded" alt="Ảnh xe">
+                <img src="${coa[7]}" class="rounded" alt="Ảnh xe">
             </div>
             <div class="col-md-10">
-                <div>Tên xe: ${coa[8]}</div>
+                <div>Tên xe: ${coa[6]}</div>
                 <div class="row">
                     <div class="col-sm-7">Tên chuyến: ${coa[0]}</div>
-                    <div class="col-md-5">Giá vé: ${coa[4]}</div>
                 </div>
                 <div>Giờ bắt đầu: ${coa[1]}</div>
                 <div>Giờ dự kiến tới nơi: ${coa[2]}</div>
-                <div>Ghế trống: ${coa[3]}</div>
-                <div>Tuyến xe: ${coa[5]}</div>
-                <div>Trạm xuất phát: ${coa[6]}</div>
-                <div>Trạm kết thúc: ${coa[7]}</div>
+                <div>Tuyến xe: ${coa[3]}</div>
+                <div>Trạm xuất phát: ${coa[4]}</div>
+                <div>Trạm kết thúc: ${coa[5]}</div>
             </div>
         </div>         
     </div>

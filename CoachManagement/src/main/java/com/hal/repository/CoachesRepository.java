@@ -17,6 +17,7 @@ public interface CoachesRepository {
     boolean addCoaches(Coaches coaches);
     Coaches getCoachesById(int coachesId);
     boolean deleteCoaches(Coaches coaches);
+    boolean updateCoachesByAdmin(Coaches coaches, int coachesId); 
     
     List<Object[]> getCoachesDetails(int start, int end, Date startDate);
     List<Object[]> getCoachesDetailsById(int coachesId);

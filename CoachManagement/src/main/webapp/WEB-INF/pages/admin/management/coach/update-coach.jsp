@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Thêm xe khách</h1>
+                    <h1>Sửa xe khách</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -55,14 +55,17 @@
                         <div class="form-group">
                             <label for="name">Tên xe</label>
                             <form:input type="text" id="name" path="name" class="form-control" />
+                            <form:errors path="name" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="licenseplates">Biển số</label>
                             <form:input type="text" id="licenseplates" path="licenseplates" class="form-control" />
+                            <form:errors path="licenseplates" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="price">Giá</label>
-                            <form:input type="number" id="price" path="price" placeholder="0" step="500" min="0" max="9999999999"  class="form-control" />
+                            <form:input type="number" id="price" path="price" step="500" min="0" max="9999999999"  class="form-control" />
+                            <form:errors path="price" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="describe">
@@ -70,6 +73,7 @@
                             </label>
                             <form:textarea id="describe" path="describe" 
                                            cssClass="form-control" />
+                            <form:errors path="describe" cssClass="text-danger" />
                         </div>
                             
                         <div class="form-group">

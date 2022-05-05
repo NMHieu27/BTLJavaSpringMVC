@@ -5,8 +5,6 @@
  */
 package com.hal.controllers;
 
-import com.hal.pojo.Comment;
-import com.hal.pojo.User;
 import com.hal.service.CoachesService;
 import com.hal.service.CommentService;
 import com.hal.service.LocationService;
@@ -14,18 +12,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
  * @author Asus
  */
 @Controller
+@ControllerAdvice
 public class HomeController {
 
     @Autowired
@@ -35,6 +35,11 @@ public class HomeController {
     @Autowired
     private CommentService commentService;
    
+    @ModelAttribute
+    public void commonAttrs(Model model, HttpSession session){
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
+    }
+    
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("location", this.locationService.getLocations(null));

@@ -32,15 +32,15 @@ public class UserRepositoryImpl implements UserRepository {
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<User> getUsers(String username) {
+    public List<User> getUsers(String name) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
 
-        if (username != null) {
-            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
+        if (name != null && !name.isEmpty()) {
+            Predicate p = builder.like(root.get("fullname").as(String.class), "%" + name.trim() + "%");
             query = query.where(p);
         }
 
@@ -112,5 +112,19 @@ public class UserRepositoryImpl implements UserRepository {
         cu.set("active", user.getActive());
         cu = cu.where(builder.equal(root.get("id").as(Integer.class), userId));
         return session.createQuery(cu).executeUpdate() > 0;
+    }
+
+    @Override
+    public List<User> getUsersByUserName(String username) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+        if (!username.isEmpty()) {
+            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
+            query = query.where(p);
+        }
+        return session.createQuery(query).getResultList();
     }
 }

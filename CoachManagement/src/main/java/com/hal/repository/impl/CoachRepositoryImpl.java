@@ -38,8 +38,8 @@ public class CoachRepositoryImpl implements CoachRepository{
         CriteriaQuery<Coach> query = builder.createQuery(Coach.class);
         Root root = query.from(Coach.class);
         query = query.select(root);
-        if(name != null){
-            Predicate p = builder.like(root.get("name").as(String.class), name.trim());
+        if(name != null && !name.isEmpty()){
+            Predicate p = builder.like(root.get("name").as(String.class), "%" + name.trim() + "%");
             query = query.where(p);
         }
         Query q = session.createQuery(query);

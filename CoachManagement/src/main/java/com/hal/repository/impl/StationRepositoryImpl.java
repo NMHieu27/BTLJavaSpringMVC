@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -35,7 +34,7 @@ public class StationRepositoryImpl implements StationRepository{
         CriteriaQuery<Station> query = builder.createQuery(Station.class);
         Root root = query.from(Station.class);
         query = query.select(root);
-        if(!kw.isEmpty()){
+        if(!kw.isEmpty() && kw != null){
             Predicate p = builder.like(root.get("name").as(String.class), "%" + kw.trim() + "%");
             query = query.where(p);
         }

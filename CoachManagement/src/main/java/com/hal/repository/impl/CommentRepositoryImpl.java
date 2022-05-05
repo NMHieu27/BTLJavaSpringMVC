@@ -59,7 +59,8 @@ public class CommentRepositoryImpl implements CommentRepository {
         query.multiselect(
                 rootUser.get("fullname"),
                 rootComment.get("createdDate"),
-                rootComment.get("content")
+                rootComment.get("content"),
+                rootUser.get("avatar")
         );
 
         query.where(predicates.toArray(new Predicate[]{}));

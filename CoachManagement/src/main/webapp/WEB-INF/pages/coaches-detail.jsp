@@ -30,12 +30,12 @@
     <div id="commentArea">
         <h4>Bình luận:</h4>
         <c:forEach var="c" items="${comments}">
-            <div class="my-date">
-                <div>${c[0]}</div>
-                <i>${c[1]}</i>
-                <div>${c[2]}</div>
-                <br>
-            </div>
+                    <div class="my-date">
+                        <div>${c[0]}</div>
+                        <i>${c[1]}</i>
+                        <div>${c[2]}</div>
+                        <br>
+                    </div>
         </c:forEach>
     </div>
     <div class="form-group">
@@ -47,38 +47,39 @@
 </div>
 <script>
     window.onload = function () {
-    let dates = document.querySelectorAll(".my-date > i");
-    for (let i = 0; i < dates.length; i++) {
-    let d = dates[i];
-    d.innerText = moment(d.innerText).fromNow();
-    }
-    };
-    function addComment(coachesId){
-    fetch("/CoachManagement/api/add-comment", {
-        method: 'post',
-        body: JSON.stringify({
-            "content": document.getElementById("commentId").value,
-            "coachesId": coachesId
-        }),
-        headers: {
-        "Content-Type": "application/json"
+        let dates = document.querySelectorAll(".my-date > i");
+        for (let i = 0; i < dates.length; i++) {
+            let d = dates[i];
+            d.innerText = moment(d.innerText).fromNow();
         }
-    }).then(function(res) {
-        console.info(res);
-        return res.json();
-    }).then(function(data){
-        console.info(data);
-        
-        let area = document.getElementById("commentArea");
-        
-        area.innerHTML = area.innerHTML +`
+    };
+    function addComment(coachesId) {
+        fetch("/CoachManagement/api/add-comment", {
+            method: 'post',
+            body: JSON.stringify({
+                "content": document.getElementById("commentId").value,
+                "coachesId": coachesId
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            console.info(res);
+            return res.json();
+        }).then(function (data) {
+            console.info(data);
+
+            let area = document.getElementById("commentArea");
+
+            area.innerHTML = area.innerHTML + `
             <div class="my-date">
                 <div>UsernameTesting</div>
-                <div>`+data.content+`</div>
-                <div>`+moment(data.createdDate).fromNow()+`</div>
+                <div>` + data.content + `</div>   
+                <div>` + moment(data.createdDate).fromNow() + `</div>
                 <br>
             </div>`;
 
-    });
-    };
+        });
+    }
+    ;
 </script>

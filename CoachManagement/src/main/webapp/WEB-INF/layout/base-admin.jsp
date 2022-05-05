@@ -34,6 +34,7 @@
         <!-- AdminLTE App -->
         <script src="<c:url value="/js/adminlte.js" />"></script>
 
+        <script src="<c:url value="/js/stats.js" />"></script>
 
         <div class="wrapper">
 

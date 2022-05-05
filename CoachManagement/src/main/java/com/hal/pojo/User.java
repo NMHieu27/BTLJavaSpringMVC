@@ -62,28 +62,29 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{user.username.notNullMsg}")
+    @Size(min = 1, max = 45, message = "{user.username.sizeMsg}")
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @NotNull(message = "{user.password.notNullMsg}")
+    @Size(min = 1, max = 100, message = "{user.password.sizeMsg}")
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    @NotNull(message = "{user.phone.notNullMsg}")
+    @Size(min = 1, max = 10, message = "{user.phone.sizeMsg}")
     @Column(name = "phone")
     private String phone;
-    @Size(max = 100)
+    @NotNull(message = "{user.fullname.notNullMsg}")
+    @Size(max = 100, message = "{user.fullname.maxMsg}")
     @Column(name = "fullname")
     private String fullname;
     @Size(max = 10)
     @Column(name = "gender")
     private String gender;
-    @Size(max = 255)
+    @Size(max = 255, message = "{user.address.maxMsg}")
     @Column(name = "address")
     private String address;
     @Column(name = "join_date")
@@ -94,7 +95,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 12)
     @Column(name = "user_role")
     private String userRole;
-    @Size(max = 100)
+    @Size(max = 100, message = "{user.avatar.maxMsg}")
     @Column(name = "avatar")
     private String avatar;
     @Column(name = "active")

@@ -55,10 +55,12 @@
                         <div class="form-group">
                             <label for="name">Tên loại giá thay đổi</label>
                             <form:input type="text" id="name" path="name" class="form-control" />
+                            <form:errors path="name" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="value">Giá trị giảm giá</label>
-                            <form:input type="number" id="value" path="value" placeholder="1.0" step="0.01" min="-1" max="1"  class="form-control" />
+                            <form:input type="number" id="value" path="value"  step="0.01" min="-1" max="1"  class="form-control" />
+                            <form:errors path="value" cssClass="text-danger" />
                         </div>
 
                         <div class="row form-group">

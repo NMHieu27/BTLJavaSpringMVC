@@ -11,18 +11,25 @@ import com.hal.pojo.User;
 import com.hal.repository.UserRepository;
 import com.hal.service.UserService;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Asus
  */
-@Service
+@Service("userDetailsService")
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -31,14 +38,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Cloudinary cloudinary;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
-    public List<User> getUsers(String username) {
-        return this.userRepository.getUsers(username);
+    public List<User> getUsers(String name) {
+        return this.userRepository.getUsers(name);
     }
 
     @Override
     public boolean addUser(User user) {
         user.setJoinDate(new Date());
+        String pass = user.getPassword();
+        user.setPassword(this.passwordEncoder.encode(pass));
         if (user.getFile() != null) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
@@ -69,6 +81,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUserByAdmin(User user, int i) {
         return this.userRepository.updateUserByAdmin(user, i);
+    }
+
+    @Override
+    public List<User> getUsersByUserName(String username) {
+        return this.userRepository.getUsersByUserName(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        List<User> users = this.getUsersByUserName(username);
+        if (users.isEmpty()) {
+            throw new UsernameNotFoundException("User kh�ng t?n t?i!!!");
+        }
+        User user = users.get(0);
+        Set<GrantedAuthority> auth = new HashSet<>();
+        auth.add(new SimpleGrantedAuthority(user.getUserRole()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
 
 }

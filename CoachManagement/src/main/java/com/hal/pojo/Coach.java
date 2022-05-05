@@ -52,23 +52,23 @@ public class Coach implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @NotNull(message = "{coach.name.notNullMsg}")
+    @Size(min = 1, max = 100, message = "{coach.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
+    @NotNull(message = "{coach.licenseplates.notNullMsg}")
+    @Size(min = 1, max = 15, message = "{coach.licenseplates.sizeMsg}")
     @Column(name = "licenseplates")
     private String licenseplates;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{coach.price.notNullMsg}")
     @Column(name = "price")
     private long price;
-    @Size(max = 500)
+    @Size(max = 500, message = "{coach.describe.maxMsg}")
     @Column(name = "`describe`")
     private String describe;
-    @Size(max = 100)
+    @Size(max = 100, message = "{coach.image.maxMsg}")
     @Column(name = "image")
     private String image;
     @Column(name = "active")

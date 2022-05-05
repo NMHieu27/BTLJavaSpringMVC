@@ -35,7 +35,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
         CriteriaQuery<Category> query = builder.createQuery(Category.class);
         Root root = query.from(Category.class);
         query = query.select(root);
-        if (kw != null) {
+        if (kw != null && !kw.isEmpty()) {
             Predicate p = builder.like(root.get("name").as(String.class), "%" + kw.trim() + "%");
             query = query.where(p);
         }

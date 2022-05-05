@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <c:url value="/admin/coaches-manage/add-coaches" var="action" />
+                    <c:url value="/admin/coaches-manage/update-coaches/${coaches.id}" var="action" />
                     <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="coaches">
                         <div class="form-group">
                             <label for="name">Tên chuyến xe</label>
@@ -60,13 +60,11 @@
 
                         <div class="form-group">
                             <label for="startDateString">Khởi chạy</label>
-                            <form:input type="datetime-local" id="startDateString" path="startDateString" class="form-control" />
-
+                            <form:input type="datetime-local" id="startDateString" path="startDateString" value="${coaches.startTime}" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label for="endDateString">Dự kiến kết thúc</label>
-                            <form:input type="datetime-local" id="endDateString" path="endDateString" class="form-control" />
-                           
+                            <form:input type="datetime-local" id="endDateString" path="endDateString" value="${coaches.endTime}" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label for="describe">
@@ -98,6 +96,11 @@
                                               itemValue="id" />
                             </form:select>
                         </div>
+                        <div class="form-group">
+                            <label for="emptySeats">Ghế trống</label>
+                            <form:input type="number" id="emptySeats" path="emptySeats" step="1" min="0" max="100"  class="form-control" />
+                            <form:errors path="emptySeats" cssClass="text-danger" />
+                        </div>
 
                         <div class="form-group">
                             <label for="driverId">
@@ -118,6 +121,31 @@
                                 <form:options items="${listPriceChange}"  
                                               itemLabel="name" 
                                               itemValue="id" />
+                            </form:select>
+                        </div>
+                        <div class="form-group">
+                            <label for="isStarted">Đã chạy</label>
+                            <form:select
+                                id="isStarted"
+                                name="isStarted"
+                                class="custom-select mb-3 form-control"
+                                path="isStarted"
+                                >
+                                <form:option value="0" label="Chưa" />
+                                <form:option value="1" label="Rồi" />
+                            </form:select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="active">Đã hủy</label>
+                            <form:select
+                                id="isCanceled"
+                                name="isCanceled"
+                                class="custom-select mb-3 form-control"
+                                path="isCanceled"
+                                >
+                                <form:option value="1" label="Hủy" />
+                                <form:option value="0" label="Không" />
                             </form:select>
                         </div>
 

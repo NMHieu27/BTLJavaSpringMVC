@@ -15,6 +15,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content" value="/WEB-INF/pages/index.jsp" />
     </definition>
+
     
     <definition name="coaches-booking" extends="baseLayout">
         <put-attribute name="title" value="Các chuyến xe" />
@@ -85,7 +86,8 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Quản lí xe khách" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/coach/add-coach.jsp" />
     </definition>
-        <definition name="update-coach" extends="baseAdmin">
+
+    <definition name="update-coach" extends="baseAdmin">
         <put-attribute name="title" value="Quản lí xe khách" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/coach/update-coach.jsp" />
     </definition>
@@ -100,6 +102,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Quản lí chuyến xe" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/coaches/add-coaches.jsp" />
     </definition>
+    <definition name="update-coaches" extends="baseAdmin">
+        <put-attribute name="title" value="Quản lí chuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/management/coaches/update-coaches.jsp" />
+    </definition>
     
     <!--Tuyến xe-->
     <definition name="route-manage" extends="baseAdmin">
@@ -113,6 +119,18 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <definition name="update-route" extends="baseAdmin">
         <put-attribute name="title" value="Quản lí tuyến xe" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/management/route/update-route.jsp" />
+    </definition>
+    
+    
+    <!--    Báo cáo thống -->
+    <definition name="route-stat" extends="baseAdmin">
+        <put-attribute name="title" value="Báo cáo tuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/stats/route-stat.jsp" />
+    </definition>
+    
+    <definition name="revenue-stat" extends="baseAdmin">
+        <put-attribute name="title" value="Báo cáo tuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/stats/revenue-stat.jsp" />
     </definition>
     
 </tiles-definitions>

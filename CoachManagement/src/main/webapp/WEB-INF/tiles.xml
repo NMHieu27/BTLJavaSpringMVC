@@ -16,6 +16,16 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/pages/index.jsp" />
     </definition>
     
+    <definition name="coaches-booking" extends="baseLayout">
+        <put-attribute name="title" value="Các chuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/coaches-booking.jsp" />
+    </definition>
+    
+    <definition name="coaches-detail" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/coaches-detail.jsp" />
+    </definition>
+    
     <definition name="baseAdmin" template="/WEB-INF/layout/base-admin.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="header" value="/WEB-INF/layout/admin-header.jsp" />

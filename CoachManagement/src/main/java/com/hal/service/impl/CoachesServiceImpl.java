@@ -68,5 +68,14 @@ public class CoachesServiceImpl implements CoachesService {
         return false;
 
     }
+    
+    @Override
+    public List<Object[]> getCoachesDetails(int start, int end, Date startDate){
+        return this.coachesRepository.getCoachesDetails(start, end, startDate);
+    }
 
+    @Override
+    public List<Object[]> getCoachesDetailsById(int coachesId){
+        return this.coachesRepository.getCoachesDetailsById(coachesId);
+    }
 }

@@ -5,6 +5,7 @@
 package com.hal.repository;
 
 import com.hal.pojo.Coaches;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface CoachesRepository {
     Coaches getCoachesById(int coachesId);
     boolean deleteCoaches(Coaches coaches);
     
+    List<Object[]> getCoachesDetails(int start, int end, Date startDate);
+    List<Object[]> getCoachesDetailsById(int coachesId);
 }

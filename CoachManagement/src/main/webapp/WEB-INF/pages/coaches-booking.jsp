@@ -74,7 +74,7 @@
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label>Họ tên</label>
-                                                <input type="text" id="fullname" class="form-control" />
+                                                <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" />
                                             </div>
                                             <div class="form-group">
                                                 <label>Số điện thoại</label>

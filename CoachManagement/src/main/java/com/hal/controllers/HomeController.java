@@ -20,4 +20,5 @@ public class HomeController {
         model.addAttribute("name", "Nguyễn Minh Hiếu");
         return "index";
     }
+    
 }

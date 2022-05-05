@@ -6,9 +6,8 @@ package com.hal.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -58,25 +55,21 @@ public class Coaches implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{coaches.name.notNullMsg}")
+    @Size(min = 1, max = 255, message = "{coaches.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "start_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
+    private LocalDateTime startTime;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "end_time")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    private LocalDateTime endTime;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{coaches.emptySeats.notNull}")
     @Column(name = "empty_seats")
     private int emptySeats;
-    @Size(max = 500)
+    @Size(max = 500, message = "{coaches.describe.sizeMsg}")
     @Column(name = "`describe`")
     private String describe;
     @Column(name = "unitprice")
@@ -118,7 +111,7 @@ public class Coaches implements Serializable {
         this.id = id;
     }
 
-    public Coaches(Integer id, String name, Date startTime, Date endTime, int emptySeats) {
+    public Coaches(Integer id, String name, LocalDateTime startTime, LocalDateTime endTime, int emptySeats) {
         this.id = id;
         this.name = name;
         this.startTime = startTime;
@@ -142,19 +135,19 @@ public class Coaches implements Serializable {
         this.name = name;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

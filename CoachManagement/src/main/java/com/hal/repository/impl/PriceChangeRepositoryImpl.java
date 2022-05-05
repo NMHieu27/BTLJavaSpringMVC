@@ -39,8 +39,8 @@ public class PriceChangeRepositoryImpl implements PriceChangeRepository {
         CriteriaQuery<Pricechange> query = builder.createQuery(Pricechange.class);
         Root root = query.from(Pricechange.class);
         query = query.select(root);
-        if (name != null) {
-            Predicate p = builder.equal(root.get("name").as(String.class), name.trim());
+        if (name != null && !name.isEmpty()) {
+            Predicate p = builder.like(root.get("name").as(String.class), "%" + name.trim() + "%");
             query = query.where(p);
         }
         Query q = session.createQuery(query);

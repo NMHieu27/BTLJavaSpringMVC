@@ -16,5 +16,6 @@ public interface CoachesRepository {
     boolean addCoaches(Coaches coaches);
     Coaches getCoachesById(int coachesId);
     boolean deleteCoaches(Coaches coaches);
+    boolean updateCoachesByAdmin(Coaches coaches, int coachesId);
     
 }

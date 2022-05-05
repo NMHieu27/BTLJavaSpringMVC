@@ -55,10 +55,12 @@
                         <div class="form-group">
                             <label for="name">Tên tuyến xe</label>
                             <form:input type="text" id="name" path="name" class="form-control" />
+                            <form:errors path="name" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="price">Giá</label>
-                            <form:input type="number" id="price" path="price" placeholder="0" step="500" min="0" max="9999999999"  class="form-control" />
+                            <form:input type="number" id="price" path="price" step="500" min="0" max="9999999999"  class="form-control" />
+                            <form:errors path="price" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="startingpointId">

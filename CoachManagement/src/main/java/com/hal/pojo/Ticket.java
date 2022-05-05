@@ -50,20 +50,20 @@ public class Ticket implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @NotNull(message = "{ticket.fullname.notNullMsg}")
+    @Size(min = 1, max = 100, message = "{ticket.fullname.sizeMsg}")
     @Column(name = "fullname")
     private String fullname;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
+    @NotNull(message = "{ticket.phone.notNullMsg}")
+    @Size(min = 1, max = 10, message = "{ticket.phone.sizeMsg}")
     @Column(name = "phone")
     private String phone;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    @NotNull(message = "{ticket.email.notNullMsg}")
+    @Size(min = 1, max = 100, message = "{ticket.email.sizeMsg}")
     @Column(name = "email")
     private String email;
     @Column(name = "price")

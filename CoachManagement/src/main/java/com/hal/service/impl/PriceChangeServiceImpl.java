@@ -46,7 +46,4 @@ public class PriceChangeServiceImpl implements PriceChangeService {
         return this.priceChangeRepository.updatePrice(prchng, priceId);
     }
 
-
-    
-
 }

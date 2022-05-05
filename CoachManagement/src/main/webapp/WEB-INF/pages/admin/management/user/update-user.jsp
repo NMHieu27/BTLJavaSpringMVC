@@ -55,11 +55,13 @@
                         <div class="form-group">
                             <label for="fullname">Họ tên</label>
                             <form:input type="text" id="fullname" path="fullname" class="form-control" />
+                            <form:errors path="fullname" cssClass="text-danger" />
                         </div>
 
                         <div class="form-group">
                             <label for="phone">Số điện thoại</label>
                             <form:input type="text" id="phone" path="phone" class="form-control" />
+                            <form:errors path="phone" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="gender">Giới tính</label>
@@ -77,6 +79,7 @@
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
                             <form:input type="text" id="address" path="address" class="form-control" />
+                            <form:errors path="address" cssClass="text-danger" />
                         </div>
 
                         <div class="form-group">

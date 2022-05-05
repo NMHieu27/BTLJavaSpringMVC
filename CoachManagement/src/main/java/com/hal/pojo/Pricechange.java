@@ -44,13 +44,13 @@ public class Pricechange implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{pricechange.name.notNullMsg}")
+    @Size(min = 1, max = 255, message = "{pricechange.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{pricechange.value.notNullMsg}")
     @Column(name = "value")
     private BigDecimal value;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pricechangeId")

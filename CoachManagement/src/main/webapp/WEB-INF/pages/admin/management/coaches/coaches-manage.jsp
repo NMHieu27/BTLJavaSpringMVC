@@ -40,12 +40,25 @@
 
         <div class="container-fluid">
 
-            <div class="d-flex p-0 text-white my-2" >
-                <!-- <div class="p-2 bg-info">Flex item 1</div> -->
-                <a class="btn btn-success" href="<c:url value="/admin/coaches-manage/add-coaches"/>">
-                    <i class="fas fa-plus-circle"></i>
-                    Thêm
-                </a>
+            <div class="row justify-content-between">
+
+                <div class="d-flex p-0 text-white my-2 mx-2">
+                    <!-- <div class="p-2 bg-info">Flex item 1</div> -->
+                    <a class="btn btn-success" href="<c:url value="/admin/coaches-manage/add-coaches"/>">
+                        <i class="fas fa-plus-circle"></i>
+                        Thêm
+                    </a>
+                </div>
+
+                <form class="d-flex my-2">
+                    <div class="form-group m-0">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Nhập tên xe..." name="kw" />
+                    </div>
+                    <input type="submit" value="Lọc dữ liệu" class="btn btn-info ml-3 mx-2 " />
+                </form>
+
             </div>
 
             <div class="card card-info">
@@ -85,9 +98,12 @@
                                     Giá gốc
                                 </th>
                                 <th style="width: 10%">
+                                    Giá sau giảm
+                                </th>
+                                <th style="width: 5%">
                                     Đã chạy
                                 </th>
-                                <th style="width: 10%">
+                                <th style="width: 5%">
                                     Đã hủy
                                 </th>
                                 <th style="width: 10%">
@@ -123,6 +139,11 @@
                                         <a>${c[6]}</a>
                                     </td>
                                     <td>
+                                        <small>${c[12]} </small>
+                                        <br><!-- comment -->
+                                        <a>Còn ${c[13]} vnđ  </a>
+                                    </td>
+                                    <td>
                                         <c:choose>
                                             <c:when test="${c[7] == true}">
                                                 <i class="fas fa-check-circle text-success"></i>
@@ -145,7 +166,7 @@
                                         </c:choose>
                                     </td>
                                     <td class="text-right py-0 align-middle">
-                                        <a class="btn btn-info btn-sm" href="#">
+                                        <a class="btn btn-info btn-sm" href="<c:url value="/admin/coaches-manage/update-coaches/${c[0]}"/>">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Sửa

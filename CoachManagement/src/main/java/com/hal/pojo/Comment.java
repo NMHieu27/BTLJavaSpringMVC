@@ -45,8 +45,8 @@ public class Comment implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{comment.content.notNullMsg}")
+    @Size(min = 1, max = 255, message = "{comment.content.sizeMsg}")
     @Column(name = "content")
     private String content;
     @Column(name = "created_date")

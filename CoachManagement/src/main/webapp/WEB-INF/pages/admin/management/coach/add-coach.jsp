@@ -55,14 +55,17 @@
                         <div class="form-group">
                             <label for="name">Tên xe</label>
                             <form:input type="text" id="name" path="name" class="form-control" />
+                            <form:errors path="name" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="licenseplates">Biển số</label>
                             <form:input type="text" id="licenseplates" path="licenseplates" class="form-control" />
+                            <form:errors path="licenseplates" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="price">Giá</label>
-                            <form:input type="number" id="price" path="price" placeholder="0" step="500" min="0" max="9999999999"  class="form-control" />
+                            <form:input type="number" id="price" path="price" step="500" min="0" max="9999999999"  class="form-control" />
+                            <form:errors path="price" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
                             <label for="describe">
@@ -70,9 +73,10 @@
                             </label>
                             <form:textarea id="describe" path="describe" 
                                            cssClass="form-control" />
+                            <form:errors path="describe" cssClass="text-danger" />
                         </div>
 
-                        <label for="file">Avatar</label>
+                        <label for="file">Hình ảnh</label>
                         <div class="custom-file mb-3 form-group">   
                             <form:input
                                 type="file"

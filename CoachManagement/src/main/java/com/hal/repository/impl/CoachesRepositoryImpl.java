@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -48,8 +49,8 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         Root rootPrice = query.from(Pricechange.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        if (name != null) {
-            predicates.add(builder.like(rootCoaches.get("name").as(String.class), name.trim()));
+        if (name != null && !name.isEmpty()) {
+            predicates.add(builder.like(rootCoaches.get("name").as(String.class), "%" + name.trim() + "%"));
         }
         predicates.add(builder.equal(rootCoaches.get("routeId"), rootRoute.get("id")));
         predicates.add(builder.equal(rootCoaches.get("driverId"), rootUser.get("id")));
@@ -61,7 +62,7 @@ public class CoachesRepositoryImpl implements CoachesRepository {
                 rootCoaches.get("emptySeats"), rootCoaches.get("describe"),
                 rootCoaches.get("unitprice"), rootCoaches.get("isStarted"),
                 rootCoaches.get("isCanceled"), rootRoute.get("name"),
-                rootUser.get("fullname"), rootCoach.get("name"), rootPrice.get("name"));
+                rootUser.get("fullname"), rootCoach.get("name"), rootPrice.get("name"), rootCoaches.get("pricechange"));
         query.where(predicates.toArray(new Predicate[]{}));
         Query q = session.createQuery(query);
         return q.getResultList();
@@ -97,6 +98,30 @@ public class CoachesRepositoryImpl implements CoachesRepository {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public boolean updateCoachesByAdmin(Coaches coaches, int coachesId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaUpdate<Coaches> cu = builder.createCriteriaUpdate(Coaches.class);
+        Root root = cu.from(Coaches.class);
+        
+        cu.set("name", coaches.getName());
+        cu.set("startTime", coaches.getStartTime());
+        cu.set("endTime", coaches.getEndTime());
+        cu.set("describe", coaches.getDescribe());
+        cu.set("routeId", coaches.getRouteId());
+        cu.set("coachId", coaches.getCoachId());
+        cu.set("driverId", coaches.getDriverId());
+        cu.set("pricechangeId", coaches.getPricechangeId());
+        cu.set("isStarted", coaches.getIsStarted());
+        cu.set("isCanceled", coaches.getIsCanceled());
+        cu.set("emptySeats", coaches.getEmptySeats());
+        cu.set("pricechange", coaches.getPricechange());
+        cu = cu.where(builder.equal(root.get("id").as(Integer.class), coachesId));
+        
+        return session.createQuery(cu).executeUpdate() > 0;
     }
 
 }

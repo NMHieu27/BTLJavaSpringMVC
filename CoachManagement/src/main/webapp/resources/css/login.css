@@ -1,0 +1,23 @@
+body {
+/*  background: scroll url('https://res.cloudinary.com/ddphodfop/image/upload/v1651739513/10_rey46j.jpg');
+  background-size: cover;*/
+/*  background: linear-gradient(to right, #0062E6, #33AEFF);*/
+/*background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(74,9,121,0.31726193895526966) 39%, rgba(0,212,255,1) 100%);*/
+background: rgb(10,17,69);
+background: linear-gradient(90deg, rgba(10,17,69,0.8298669809720763) 0%, rgba(49,12,79,0.7682423311121324) 17%, rgba(28,16,107,0.31726193895526966) 57%, rgba(0,212,255,1) 95%);
+}
+
+.card-img-left {
+  width: 45%;
+  /* Link to your background image using in the property below! */
+  background: scroll center url('https://res.cloudinary.com/ddphodfop/image/upload/v1651739513/10_rey46j.jpg');
+  background-size: cover;
+}
+
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+

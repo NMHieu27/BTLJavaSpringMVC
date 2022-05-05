@@ -45,12 +45,12 @@ public class Route implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @NotNull(message = "{route.name.notNullMsg}")
+    @Size(min = 1, max = 255, message = "{route.name.sizeMsg}")
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{route.price.notNullMsg}")
     @Column(name = "price")
     private long price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "routeId")

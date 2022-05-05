@@ -28,7 +28,7 @@
         <!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    
+
     <c:if test="${errMsg != null}">
         <div class="alert alert-danger mx-3">
             ${errMsg}
@@ -40,13 +40,27 @@
 
         <div class="container-fluid">
 
-            <div class="d-flex p-0 text-white my-2">
-                <!-- <div class="p-2 bg-info">Flex item 1</div> -->
-                <a class="btn btn-success" href="<c:url value="/admin/users-manage/add-user"/>">
-                    <i class="fas fa-plus-circle"></i>
-                    Thêm
-                </a>
+            <div class="row justify-content-between">
+
+                <div class="d-flex p-0 text-white my-2 mx-2">
+                    <!-- <div class="p-2 bg-info">Flex item 1</div> -->
+                    <a class="btn btn-success" href="<c:url value="/admin/users-manage/add-user"/>">
+                        <i class="fas fa-plus-circle"></i>
+                        Thêm
+                    </a>
+                </div>
+
+                <form class="d-flex my-2">
+                    <div class="form-group m-0">
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Nhập tên xe..." name="kw" />
+                    </div>
+                    <input type="submit" value="Lọc dữ liệu" class="btn btn-info ml-3 mx-2 " />
+                </form>
+
             </div>
+
 
             <div class="card card-info">
                 <div class="card-header">

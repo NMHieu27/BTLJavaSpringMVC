@@ -44,8 +44,8 @@ public class RouteRepositoryImpl implements RouteRepository {
         Root rootDes = query.from(Station.class);
 
         List<Predicate> predicates = new ArrayList<>();
-        if (name != null) {
-            predicates.add(builder.like(rootR.get("name").as(String.class), name.trim()));
+        if (name != null && !name.isEmpty()) {
+            predicates.add(builder.like(rootR.get("name").as(String.class), "%" + name.trim() + "%"));
         }
         predicates.add(builder.equal(rootR.get("startingpointId"), rootStar.get("id")));
         predicates.add(builder.equal(rootR.get("destinationId"), rootDes.get("id")));

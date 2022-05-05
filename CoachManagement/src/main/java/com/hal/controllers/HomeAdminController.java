@@ -68,7 +68,7 @@ public class HomeAdminController {
         return "home-admin";
     }
 
-    //Quản lí người dùng
+    //Qu?n l� ng??i d�ng
     @GetMapping("/users-manage")
     public String usersManage(Model model,
             @RequestParam(name = "kw", defaultValue = "") String kw) {
@@ -88,6 +88,10 @@ public class HomeAdminController {
         if (result.hasErrors()) {
             return "add-user";
         }
+        if (user.getFile() == null){
+            model.addAttribute("errMsg", "Mời bạn thiết lập ảnh đại diện!");
+            return "add-user";
+        }
         this.userService.addUser(user);
         return "redirect:/admin/users-manage";
     }
@@ -100,13 +104,13 @@ public class HomeAdminController {
 
     @PostMapping("/users-manage/update-user/{user_id}")
     public String updatePriceProcess(Model model,
-            @ModelAttribute(value = "user") @Valid User user,
+            @ModelAttribute(value = "user")  User user,
             BindingResult result,
             @PathVariable(value = "user_id") int i) {
 //        if (this.userService.updateUserByAdmin(user, i) == true) {
 //            return "redirect:/admin/users-manage";
 //        }
-//        model.addAttribute("errMsg", "Không thể sửa");
+//        model.addAttribute("errMsg", "Kh�ng th? s?a");
 //        return "update-user";
         if (result.hasErrors()) {
             return "update-user";
@@ -121,11 +125,11 @@ public class HomeAdminController {
         if (this.userService.deleteUser(u) == true) {
             return "redirect:/admin/users-manage";
         }
-        model.addAttribute("errMsg", "Không thể xóa");
+        model.addAttribute("errMsg", "Kh�ng th? x�a");
         return "users-manage";
     }
 
-    //Quản lí giá
+    //Qu?n l� gi�
     @GetMapping("/price-manage")
     public String priceManage(Model model,
             @RequestParam(name = "kw", defaultValue = "") String kw) {
@@ -145,7 +149,7 @@ public class HomeAdminController {
 //        if (this.priceChangeService.addPrice(pricechange) == true) {
 //            return "redirect:/admin/price-manage";
 //        }
-//        model.addAttribute("errMsg", "Có lỗi xảy ra");
+//        model.addAttribute("errMsg", "C� l?i x?y ra");
 //        return "add-price";
         if (result.hasErrors()) {
             return "add-price";
@@ -168,7 +172,7 @@ public class HomeAdminController {
 //        if (this.priceChangeService.updatePrice(pricechange, i) == true) {
 //            return "redirect:/admin/price-manage";
 //        }
-//        model.addAttribute("errMsg", "Không thể sửa");
+//        model.addAttribute("errMsg", "Kh�ng th? s?a");
 //        return "update-price";
         if (result.hasErrors()) {
             return "update-price";
@@ -184,11 +188,11 @@ public class HomeAdminController {
         if (this.priceChangeService.deletePrice(p) == true) {
             return "redirect:/admin/price-manage";
         }
-        model.addAttribute("errMsg", "Không thể xóa");
+        model.addAttribute("errMsg", "Kh�ng th? x�a");
         return "price-manage";
     }
 
-    //Quản lí xe khách
+    //Qu?n l� xe kh�ch
     @GetMapping("/coach-manage")
     public String coachManage(Model model,
             @RequestParam(name = "kw", defaultValue = "") String kw) {
@@ -209,11 +213,11 @@ public class HomeAdminController {
 //        if (this.coachService.addCoach(coach) == true) {
 //            return "redirect:/admin/coach-manage";
 //        }
-//        model.addAttribute("errMsg", "Có lỗi xảy ra");
+//        model.addAttribute("errMsg", "C� l?i x?y ra");
 //        model.addAttribute("cates", this.categoryService.getCates(null));
 //        return "add-coach";
         if (result.hasErrors()) {
-            model.addAttribute("errMsg", "Có lỗi xảy ra");
+            model.addAttribute("errMsg", "C� l?i x?y ra");
             model.addAttribute("cates", this.categoryService.getCates(null));
             return "add-coach";
         }
@@ -236,11 +240,11 @@ public class HomeAdminController {
 //        if (this.coachService.updateCoachByAdmin(coach, i) == true) {
 //            return "redirect:/admin/coach-manage";
 //        }
-//        model.addAttribute("errMsg", "Không thể sửa");
+//        model.addAttribute("errMsg", "Kh�ng th? s?a");
 //        model.addAttribute("cates", this.categoryService.getCates(null));
 //        return "update-coach";
         if (result.hasErrors()) {
-            model.addAttribute("errMsg", "Không thể sửa");
+            model.addAttribute("errMsg", "Kh�ng th? s?a");
             model.addAttribute("cates", this.categoryService.getCates(null));
             return "update-coach";
         }
@@ -254,11 +258,11 @@ public class HomeAdminController {
         if (this.coachService.deleteCoach(c) == true) {
             return "redirect:/admin/coach-manage";
         }
-        model.addAttribute("errMsg", "Không thể xóa");
+        model.addAttribute("errMsg", "Kh�ng th? x�a");
         return "coach-manage";
     }
 
-    //Quản lí tuyến xe
+    //Qu?n l� tuy?n xe
     @GetMapping("/route-manage")
     public String routeManage(Model model,
             @RequestParam(name = "kw", defaultValue = "") String kw) {
@@ -279,12 +283,12 @@ public class HomeAdminController {
 //        if (this.routeService.addRoute(route) == true) {
 //            return "redirect:/admin/route-manage";
 //        }
-//        model.addAttribute("errMsg", "Có lỗi xảy ra");
+//        model.addAttribute("errMsg", "C� l?i x?y ra");
 //        model.addAttribute("station", this.stationService.getStation(""));
 //        return "add-route";
 
         if (result.hasErrors()) {
-            model.addAttribute("errMsg", "Có lỗi xảy ra");
+            model.addAttribute("errMsg", "C� l?i x?y ra");
             model.addAttribute("station", this.stationService.getStation(""));
             return "add-route";
         }
@@ -307,11 +311,11 @@ public class HomeAdminController {
 //        if (this.routeService.updateRouteByAdmin(route, i)) {
 //            return "redirect:/admin/route-manage";
 //        }
-//        model.addAttribute("errMsg", "Không thể sửa");
+//        model.addAttribute("errMsg", "Kh�ng th? s?a");
 //        model.addAttribute("station", this.stationService.getStation(""));
 //        return "update-route";
         if (result.hasErrors()) {
-            model.addAttribute("errMsg", "Không thể sửa");
+            model.addAttribute("errMsg", "Kh�ng th? s?a");
             model.addAttribute("station", this.stationService.getStation(""));
             return "update-route";
         }
@@ -325,11 +329,11 @@ public class HomeAdminController {
         if (this.routeService.deleteRoute(r) == true) {
             return "redirect:/admin/route-manage";
         }
-        model.addAttribute("errMsg", "Không thể xóa");
+        model.addAttribute("errMsg", "Kh�ng th? x�a");
         return "route-manage";
     }
 
-    //Quản lí chuyến xe
+    //Qu?n l� chuy?n xe
     @GetMapping("/coaches-manage")
     public String coachesManage(Model model,
             @RequestParam(name = "kw", defaultValue = "") String kw) {
@@ -357,14 +361,14 @@ public class HomeAdminController {
 //        model.addAttribute("listCoach", this.coachService.getCoach(null));
 //        model.addAttribute("listDriver", this.userService.getUserByRole(User.DRIVER));
 //        model.addAttribute("listPriceChange", this.priceChangeService.getPriceChange(null));
-//        model.addAttribute("errMsg", "Lỗi");
+//        model.addAttribute("errMsg", "L?i");
 //        return "add-coaches";
         if (result.hasErrors()) {
             model.addAttribute("listRoute", this.routeService.getRoutes(null));
             model.addAttribute("listCoach", this.coachService.getCoach(null));
             model.addAttribute("listDriver", this.userService.getUserByRole(User.DRIVER));
             model.addAttribute("listPriceChange", this.priceChangeService.getPriceChange(null));
-            model.addAttribute("errMsg", "Lỗi");
+            model.addAttribute("errMsg", "L?i");
             return "add-coaches";
         }
         System.out.println(coaches.getCoachId().getId());
@@ -382,7 +386,7 @@ public class HomeAdminController {
         System.out.println("Tien cua route");
         System.out.println(routePrice);
         System.out.println("Value:");
-        //Giá trị thay đổi giá 30%, 20%, 15% kiểu Bigdecimal
+        //Gi� tr? thay ??i gi� 30%, 20%, 15% ki?u Bigdecimal
 
 //        BigDecimal valuePriceChange = coaches.getPricechangeId().getValue();
         int priceChangeId = coaches.getPricechangeId().getId();
@@ -390,23 +394,23 @@ public class HomeAdminController {
         BigDecimal valuePriceChange = pc1.getValue();
         System.out.println(valuePriceChange);
 
-        //Giá gốc kiểu long
+        //Gi� g?c ki?u long
         long coachesUnitPriceLong = coachPrice + routePrice;
-        System.out.println("Giá gốc: ");
+        System.out.println("Gi� g?c: ");
         System.out.println(coachesUnitPriceLong);
 
-        //Giá gốc kiểu Bigdecimal
+        //Gi� g?c ki?u Bigdecimal
         BigDecimal coachesUnitPriceBigDecimal = new BigDecimal(coachesUnitPriceLong);
 
-        //Số tiền được giảm, tăng dạng Bigdecimal
+        //S? ti?n ???c gi?m, t?ng d?ng Bigdecimal
         BigDecimal coachesChangeBigDecimal = coachesUnitPriceBigDecimal.multiply(valuePriceChange);
 
-        //Số tiền được giảm, tăng dạng Long
+        //S? ti?n ???c gi?m, t?ng d?ng Long
         long coachesChangeLong = coachesChangeBigDecimal.longValue();
 
-        //Số tiền sau khi được giảm giá
+        //S? ti?n sau khi ???c gi?m gi�
         long coachesPriceAfterChange = coachesUnitPriceLong + coachesChangeLong;
-        System.out.println("Giá sau khi giảm giá:");
+        System.out.println("Gi� sau khi gi?m gi�:");
         System.out.println(coachesPriceAfterChange);
 
         coaches.setEmptySeats(emptySeat);
@@ -435,11 +439,11 @@ public class HomeAdminController {
         coaches.setStartTime(LocalDateTime.parse(coaches.getStartDateString()));
         coaches.setEndTime(LocalDateTime.parse(coaches.getEndDateString()));
 
-//        Ghi chú: Sẽ tính lại tiền trước và sau giả giá nếu có thay đổi xe và tuyến xe
+//        Ghi ch�: S? t�nh l?i ti?n tr??c v� sau gi? gi� n?u c� thay ??i xe v� tuy?n xe
 //        if (this.coachesService.updateCoachesByAdmin(coaches, i) == true) {
 //            return "redirect:/admin/coaches-manage";
 //        }
-//        model.addAttribute("errMsg", "Không thể sửa");
+//        model.addAttribute("errMsg", "Kh�ng th? s?a");
 //        model.addAttribute("coaches", this.coachesService.getCoachesById(i));
 //        model.addAttribute("listRoute", this.routeService.getRoutes(null));
 //        model.addAttribute("listCoach", this.coachService.getCoach(null));
@@ -447,7 +451,7 @@ public class HomeAdminController {
 //        model.addAttribute("listPriceChange", this.priceChangeService.getPriceChange(null));
 //        return "update-coaches";
         if (result.hasErrors()) {
-            model.addAttribute("errMsg", "Không thể sửa");
+            model.addAttribute("errMsg", "Kh�ng th? s?a");
             model.addAttribute("coaches", this.coachesService.getCoachesById(i));
             model.addAttribute("listRoute", this.routeService.getRoutes(null));
             model.addAttribute("listCoach", this.coachService.getCoach(null));
@@ -467,7 +471,7 @@ public class HomeAdminController {
         System.out.println("Tien cua route");
         System.out.println(routePrice);
         System.out.println("Value:");
-        //Giá trị thay đổi giá 30%, 20%, 15% kiểu Bigdecimal
+        //Gi� tr? thay ??i gi� 30%, 20%, 15% ki?u Bigdecimal
 
 //        BigDecimal valuePriceChange = coaches.getPricechangeId().getValue();
         int priceChangeId = coaches.getPricechangeId().getId();
@@ -475,23 +479,23 @@ public class HomeAdminController {
         BigDecimal valuePriceChange = pc1.getValue();
         System.out.println(valuePriceChange);
 
-        //Giá gốc kiểu long
+        //Gi� g?c ki?u long
         long coachesUnitPriceLong = coachPrice + routePrice;
-        System.out.println("Giá gốc: ");
+        System.out.println("Gi� g?c: ");
         System.out.println(coachesUnitPriceLong);
 
-        //Giá gốc kiểu Bigdecimal
+        //Gi� g?c ki?u Bigdecimal
         BigDecimal coachesUnitPriceBigDecimal = new BigDecimal(coachesUnitPriceLong);
 
-        //Số tiền được giảm, tăng dạng Bigdecimal
+        //S? ti?n ???c gi?m, t?ng d?ng Bigdecimal
         BigDecimal coachesChangeBigDecimal = coachesUnitPriceBigDecimal.multiply(valuePriceChange);
 
-        //Số tiền được giảm, tăng dạng Long
+        //S? ti?n ???c gi?m, t?ng d?ng Long
         long coachesChangeLong = coachesChangeBigDecimal.longValue();
 
-        //Số tiền sau khi được giảm giá
+        //S? ti?n sau khi ???c gi?m gi�
         long coachesPriceAfterChange = coachesUnitPriceLong + coachesChangeLong;
-        System.out.println("Giá sau khi giảm giá:");
+        System.out.println("Gi� sau khi gi?m gi�:");
         System.out.println(coachesPriceAfterChange);
 
         coaches.setPricechange(coachesPriceAfterChange);
@@ -505,18 +509,18 @@ public class HomeAdminController {
             @RequestParam(name = "kw", defaultValue = "") String kw) {
         Coaches coaches = this.coachesService.getCoachesById(coachesId);
         if (coaches.getIsStarted() == true) {
-            model.addAttribute("errMsg", "Không thể xóa vì xe đã chạy");
+            model.addAttribute("errMsg", "Kh�ng th? x�a v� xe ?� ch?y");
             model.addAttribute("Coaches", this.coachesService.getCoaches(kw));
             return "coaches-manage";
         }
         if (this.coachesService.deleteCoaches(coaches) == true) {
             return "redirect:/admin/coaches-manage";
         }
-        model.addAttribute("errMsg", "Không thể xóa");
+        model.addAttribute("errMsg", "Kh�ng th? x�a");
         return "coaches-manage";
     }
 
-//    Báo cáo thống kê
+//    B�o c�o th?ng k�
     @GetMapping("/route-stat")
     public String routeStat(Model model) {
         model.addAttribute("routeStat", this.statsService.getRouteStat());

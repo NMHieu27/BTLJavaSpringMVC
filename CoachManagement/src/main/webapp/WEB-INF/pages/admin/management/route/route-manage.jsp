@@ -53,7 +53,7 @@
                     <div class="form-group m-0">
                         <input type="text"
                                class="form-control"
-                               placeholder="Nhập tên xe..." name="kw" />
+                               placeholder="Nhập tên tuyến xe..." name="kw" />
                     </div>
                     <input type="submit" value="Lọc dữ liệu" class="btn btn-info ml-3 mx-2 " />
                 </form>

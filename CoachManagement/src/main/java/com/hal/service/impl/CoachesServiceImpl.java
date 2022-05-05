@@ -8,6 +8,7 @@ import com.hal.pojo.Coaches;
 import com.hal.repository.CoachesRepository;
 import com.hal.service.CoachesService;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,6 @@ public class CoachesServiceImpl implements CoachesService {
         try {
             coaches.setStartTime(LocalDateTime.parse(coaches.getStartDateString()));
             coaches.setEndTime(LocalDateTime.parse(coaches.getEndDateString()));
-//            coaches.setEmptySeats(20);
             return this.coachesRepository.addCoaches(coaches);
         } catch (HibernateException ex) {
             System.out.println(ex.getMessage());
@@ -57,4 +57,13 @@ public class CoachesServiceImpl implements CoachesService {
         return this.coachesRepository.updateCoachesByAdmin(coaches, coachesId);
     }
 
+    @Override
+    public List<Object[]> getCoachesDetails(int start, int end, Date startDate) {
+        return this.coachesRepository.getCoachesDetails(start, end, startDate);
+    }
+
+    @Override
+    public List<Object[]> getCoachesDetailsById(int coachesId) {
+        return this.coachesRepository.getCoachesDetailsById(coachesId);
+    }
 }

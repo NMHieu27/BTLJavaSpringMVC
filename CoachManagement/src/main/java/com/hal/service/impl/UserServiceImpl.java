@@ -22,6 +22,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -37,6 +38,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Cloudinary cloudinary;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public List<User> getUsers(String name) {
         return this.userRepository.getUsers(name);
@@ -45,6 +49,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUser(User user) {
         user.setJoinDate(new Date());
+        String pass = user.getPassword();
+        user.setPassword(this.passwordEncoder.encode(pass));
         if (user.getFile() != null) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
@@ -85,8 +91,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users = this.getUsersByUserName(username);
-        if(users.isEmpty())
-            throw new UsernameNotFoundException("User không tồn tại!!!");
+        if (users.isEmpty()) {
+            throw new UsernameNotFoundException("User kh�ng t?n t?i!!!");
+        }
         User user = users.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getUserRole()));

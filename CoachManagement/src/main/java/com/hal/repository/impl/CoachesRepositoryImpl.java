@@ -15,6 +15,8 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
+import com.hal.pojo.Station;
+import java.util.Date;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -106,7 +108,7 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaUpdate<Coaches> cu = builder.createCriteriaUpdate(Coaches.class);
         Root root = cu.from(Coaches.class);
-        
+
         cu.set("name", coaches.getName());
         cu.set("startTime", coaches.getStartTime());
         cu.set("endTime", coaches.getEndTime());
@@ -120,8 +122,86 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         cu.set("emptySeats", coaches.getEmptySeats());
         cu.set("pricechange", coaches.getPricechange());
         cu = cu.where(builder.equal(root.get("id").as(Integer.class), coachesId));
-        
+
         return session.createQuery(cu).executeUpdate() > 0;
     }
 
+    public List<Object[]> getCoachesDetails(int start, int end, Date startDate) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rootCoaches = query.from(Coaches.class);
+        Root rootRoute = query.from(Route.class);
+        Root rootSationStart = query.from(Station.class);
+        Root rootStationEnd = query.from(Station.class);
+        Root rootCoach = query.from(Coach.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootCoaches.get("routeId"), rootRoute.get("id")));
+        predicates.add(builder.equal(rootCoaches.get("coachId"), rootCoach.get("id")));
+        predicates.add(builder.equal(rootCoaches.get("isStarted"), 0));
+        predicates.add(builder.equal(rootRoute.get("startingpointId"), rootSationStart.get("id")));
+        predicates.add(builder.equal(rootSationStart.get("locationId"), start));
+        predicates.add(builder.equal(rootRoute.get("destinationId"), rootStationEnd.get("id")));
+        predicates.add(builder.equal(rootStationEnd.get("locationId"), end));
+        predicates.add(builder.equal(builder.function("date", Date.class, rootCoaches.get("startTime")), startDate));
+
+        query.multiselect(
+                rootCoaches.get("name"),
+                rootCoaches.get("startTime"),
+                rootCoaches.get("endTime"),
+                rootCoaches.get("emptySeats"),
+                rootCoaches.get("pricechange"),
+                rootRoute.get("name"),
+                rootSationStart.get("name"),
+                rootStationEnd.get("name"),
+                rootCoach.get("name"),
+                rootCoach.get("image"),
+                rootCoach.get("id"),
+                rootRoute.get("id"),
+                rootCoaches.get("id")
+        );
+
+        query.where(predicates.toArray(new Predicate[]{}));
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> getCoachesDetailsById(int coachesId) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+
+        Root rootCoaches = query.from(Coaches.class);
+        Root rootRoute = query.from(Route.class);
+        Root rootSationStart = query.from(Station.class);
+        Root rootStationEnd = query.from(Station.class);
+        Root rootCoach = query.from(Coach.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(builder.equal(rootCoaches.get("id"), coachesId));
+        predicates.add(builder.equal(rootCoaches.get("routeId"), rootRoute.get("id")));
+        predicates.add(builder.equal(rootCoaches.get("coachId"), rootCoach.get("id")));
+        predicates.add(builder.equal(rootRoute.get("startingpointId"), rootSationStart.get("id")));
+        predicates.add(builder.equal(rootRoute.get("destinationId"), rootStationEnd.get("id")));
+
+        query.multiselect(
+                rootCoaches.get("name"),
+                rootCoaches.get("startTime"),
+                rootCoaches.get("endTime"),
+                rootCoaches.get("emptySeats"),
+                rootCoaches.get("pricechange"),
+                rootRoute.get("name"),
+                rootSationStart.get("name"),
+                rootStationEnd.get("name"),
+                rootCoach.get("name"),
+                rootCoach.get("image")
+        );
+
+        query.where(predicates.toArray(new Predicate[]{}));
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
 }

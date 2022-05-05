@@ -5,6 +5,7 @@
 package com.hal.service;
 
 import com.hal.pojo.Coaches;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface CoachesService {
     Coaches getCoachesById(int coachesId);
     boolean deleteCoaches(Coaches coaches);
     boolean updateCoachesByAdmin(Coaches coaches, int coachesId);
+    List<Object[]> getCoachesDetails(int start, int end, Date startDate);
+    List<Object[]> getCoachesDetailsById(int coachesId);
 }

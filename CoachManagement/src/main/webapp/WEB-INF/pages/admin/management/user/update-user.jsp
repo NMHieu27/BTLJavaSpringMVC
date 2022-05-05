@@ -52,6 +52,7 @@
                 <div class="card-body">
                     <c:url value="/admin/users-manage/update-user/${user.id}" var="action" />
                     <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="user">
+                        <form:errors path="*" cssClass="text-danger" />
                         <div class="form-group">
                             <label for="fullname">Họ tên</label>
                             <form:input type="text" id="fullname" path="fullname" class="form-control" />

@@ -5,6 +5,8 @@
 package com.hal.controllers;
 
 import com.hal.pojo.User;
+import com.hal.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
+    @Autowired
+    private UserService userDetailsService;
+    
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -31,6 +36,19 @@ public class LoginController {
 
     @PostMapping("/register")
     public String register(Model model, @ModelAttribute(value = "user") User user) {
+        String errMsg = null;
+        user.setUserRole(User.USER);
+        if(user.getPassword().equals(user.getConfirmPassword())){
+            if(this.userDetailsService.addUser(user) == true)
+                return "redirect:/login";
+            else if (user.getFile() == null) {
+                errMsg = "Mời bạn thiết lập ảnh đại diện!";
+            }
+            else errMsg = "Có lỗi xảy ra!!!";
+        }
+        else
+            errMsg = "Mật khẩu không khớp";
+        model.addAttribute("errMsg", errMsg);
         return "register";
     }
 }

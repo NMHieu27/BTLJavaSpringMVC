@@ -68,7 +68,7 @@ public class User implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull(message = "{user.password.notNullMsg}")
-    @Size(min = 1, max = 20, message = "{user.password.sizeMsg}")
+    @Size(min = 1, max = 100, message = "{user.password.sizeMsg}")
     @Column(name = "password")
     private String password;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation

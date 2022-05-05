@@ -34,6 +34,16 @@
                         </div>
                         <div class="card-body p-4 p-sm-5">
                             <h5 class="card-title text-center mb-5 fw-light fs-5">ĐĂNG NHẬP</h5>
+                            <c:if test="${param.error != null}">
+                                <div class="alert alert-danger">
+                                    Đã có lỗi xảy ra! Vui lòng quay lại sau!
+                                </div>
+                            </c:if>
+                            <c:if test="${param.accessDenied != null}">
+                                <div class="alert alert-danger">
+                                    Bạn không có quyền truy cập!!!
+                                </div>
+                            </c:if>
                             <c:url value="/login" var="action" />
                             <form method="post" action="${action}">
                                 <div class="form-group">
@@ -47,8 +57,8 @@
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                                 </div>
                                 <div class="d-grid mb-2 form-group text-center">
-<!--                                    <button class="btn  btn-primary btn-login fw-bold text-uppercase" type="submit">Đăng nhập</button>-->
-                                    <input type="submit" value="Đăng nhập" />
+                                    <!--                                    <button class="btn  btn-primary btn-login fw-bold text-uppercase" type="submit">Đăng nhập</button>-->
+                                    <input class="btn  btn-primary btn-login fw-bold text-uppercase" type="submit" value="Đăng nhập" />
                                 </div>
                                 <br>
                                 <a class="d-block text-center mt-2 small" href="<c:url value="/register"/>">Bạn chưa có tài khoản? Đăng kí</a>

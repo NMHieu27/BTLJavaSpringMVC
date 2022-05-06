@@ -31,6 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/user-booking-history"/>">Xem lịch sử</a>
                 </li>
+				<li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/staff/ticket-management"/>">Xem vé xe</a>
+                </li>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <li class="nav-item">
                         <a href="<c:url value="/login" />" class="nav-link text-danger">

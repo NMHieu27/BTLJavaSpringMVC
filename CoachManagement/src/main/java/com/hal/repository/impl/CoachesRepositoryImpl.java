@@ -240,4 +240,16 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         Query q = session.createQuery(query);
         return q.getResultList();
     }
+    
+    @Override
+    public boolean updateCoachesSeat(Coaches coaches) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.update(coaches);
+            return true;
+        } catch (HibernateException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }   
 }

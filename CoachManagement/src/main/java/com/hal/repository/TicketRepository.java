@@ -5,7 +5,9 @@
  */
 package com.hal.repository;
 
+import com.hal.pojo.Coaches;
 import com.hal.pojo.Ticket;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import com.hal.pojo.Ticket;
  */
 public interface TicketRepository {
     Ticket addTicket(Ticket ticket);
+    List<Ticket> getTicketsByChoachesId(int coachesId);
 }

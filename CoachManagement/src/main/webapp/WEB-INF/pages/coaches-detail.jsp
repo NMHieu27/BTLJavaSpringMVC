@@ -30,12 +30,12 @@
     <div id="commentArea">
         <h4>Bình luận:</h4>
         <c:forEach var="c" items="${comments}">
-                    <div class="my-date">
-                        <div>${c[0]}</div>
-                        <i>${c[1]}</i>
-                        <div>${c[2]}</div>
-                        <br>
-                    </div>
+            <div class="my-date">
+                <div>${c[0]}</div>
+                <i>${c[1]}</i>
+                <div>${c[2]}</div>
+                <br>
+            </div>
         </c:forEach>
     </div>
     <div class="form-group">
@@ -54,32 +54,34 @@
         }
     };
     function addComment(coachesId) {
-        fetch("/CoachManagement/api/add-comment", {
-            method: 'post',
-            body: JSON.stringify({
-                "content": document.getElementById("commentId").value,
-                "coachesId": coachesId
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (res) {
-            console.info(res);
-            return res.json();
-        }).then(function (data) {
-            console.info(data);
+        if (document.getElementById("commentId").value.trim() != "") {
+            fetch("/CoachManagement/api/add-comment", {
+                method: 'post',
+                body: JSON.stringify({
+                    "content": document.getElementById("commentId").value.trim(),
+                    "coachesId": coachesId
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (res) {
+                console.info(res);
+                return res.json();
+            }).then(function (data) {
+                console.info(data);
 
-            let area = document.getElementById("commentArea");
+                let area = document.getElementById("commentArea");
 
-            area.innerHTML = area.innerHTML + `
+                area.innerHTML = area.innerHTML + `
             <div class="my-date">
                 <div>UsernameTesting</div>
                 <div>` + data.content + `</div>   
                 <div>` + moment(data.createdDate).fromNow() + `</div>
                 <br>
             </div>`;
-
-        });
+            });
+        }
+        document.getElementById("commentId").value = "";
     }
     ;
 </script>

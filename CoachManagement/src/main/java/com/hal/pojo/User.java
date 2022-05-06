@@ -26,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -108,6 +109,7 @@ public class User implements Serializable {
     private Collection<Comment> commentCollection;
 
     @Transient
+    @Nullable
     @JsonIgnore
     private MultipartFile file;
     @Transient

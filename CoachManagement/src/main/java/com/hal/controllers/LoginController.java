@@ -47,12 +47,13 @@ public class LoginController {
             }
             if (this.userDetailsService.addUser(user) == true) {
                 return "redirect:/login";
-            } else 
+            } else {
                 errMsg = "Có lỗi xảy ra!!!";
-            }else {
+            }
+        } else {
             errMsg = "Mật khẩu không khớp";
         }
-            model.addAttribute("errMsg", errMsg);
-            return "register";
+        model.addAttribute("errMsg", errMsg);
+        return "register";
     }
 }

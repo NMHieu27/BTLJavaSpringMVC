@@ -9,11 +9,14 @@ import javax.persistence.NoResultException;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Asus
  */
+
 public class UserUsernameValidator implements ConstraintValidator<UserUsername, String>{
 
     @Autowired
@@ -27,7 +30,7 @@ public class UserUsernameValidator implements ConstraintValidator<UserUsername, 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         try {
-            return this.userService.checkUsername(value);
+            return !this.userService.checkUsername(value);
         } catch (NoResultException e) {
             return false;
         }

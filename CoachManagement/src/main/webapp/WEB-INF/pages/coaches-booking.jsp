@@ -118,7 +118,7 @@
                                         <input type="text" id="email" class="form-control" required="required"/>
                                     </div>											
                                     <div class="modal-footer">
-                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="sunmit" value="Thanh toán"/>
+                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
                                     </div>
                                 </div>
                                 <!-- Modal footer -->
@@ -181,12 +181,19 @@
                         console.info(data);
                         document.getElementById("closeModal").click();
                         let area = document.getElementById("main-div");
-                        area.innerHTML = area.innerHTML + `<div class="alert alert-success alert-dismissible fixed-bottom">
+                        area.innerHTML = area.innerHTML + `<div class="alert alert-success alert-dismissible fixed-top">
                                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         <strong>Đặt vé thành công!</strong> Vui lòng kiểm tra email và số điện thoại.
                                                     </div>`;
                     });
+                } else {
+                    let area = document.getElementById("myModal");
+                    area.innerHTML = area.innerHTML + `<div class="alert alert-danger alert-dismissible">
+                                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        <strong>Vui lòng điền đầy đủ thông tin!</strong>
+                                                    </div>`;
                 }
+                ;
             } else {
                 let area = document.getElementById("myModal");
                 area.innerHTML = area.innerHTML + `<div class="alert alert-danger alert-dismissible fixed-bottom">
@@ -194,6 +201,7 @@
                                                         <strong>Đặt vé thất bại!</strong> xe đã hết chổ ngồi.
                                                     </div>`;
             }
+            ;
         });
     }
     ;

@@ -5,6 +5,7 @@
  */
 package com.hal.controllers;
 
+import com.hal.pojo.User;
 import com.hal.service.CoachesService;
 import com.hal.service.CommentService;
 import com.hal.service.LocationService;
@@ -77,8 +78,11 @@ public class HomeController {
     }
     
     @GetMapping("user-booking-history")
-    public String getUserBookingHistory(Model model, HttpServletRequest request) {
-            model.addAttribute("tickets", this.coachesService.getCoachesDetailsByUser(6));
+    public String getUserBookingHistory(Model model, HttpServletRequest request, HttpSession session) {
+            User user = (User) session.getAttribute("currentUser");
+            if(user == null)
+                return "login";
+            model.addAttribute("tickets", this.coachesService.getCoachesDetailsByUser(user.getId()));
         return "user-booking-history";
     }
 }

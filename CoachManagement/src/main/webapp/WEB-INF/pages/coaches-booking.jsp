@@ -117,7 +117,7 @@
                                         <input type="text" id="email" class="form-control" required="required"/>
                                     </div>											
                                     <div class="modal-footer">
-                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
+                                        <input class="btn-primary btn" id="pay-btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
                                     </div>
                                 </div>
                                 <!-- Modal footer -->
@@ -145,6 +145,7 @@
         datePicker.setAttribute("min", today);
     };
     function addTicket(coachesId, price) {
+        document.getElementById("pay-btn").disabled = true;
         fetch("/CoachManagement/api/seat-check", {
             method: 'post',
             body: JSON.stringify({
@@ -184,6 +185,7 @@
                                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         <strong>Đặt vé thành công!</strong> Vui lòng kiểm tra email và số điện thoại.
                                                     </div>`;
+                        document.getElementById("pay-btn").disabled = false;
                     });
                 } else {
                     let area = document.getElementById("myModal");
@@ -191,6 +193,7 @@
                                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         <strong>Vui lòng điền đầy đủ thông tin!</strong>
                                                     </div>`;
+                    document.getElementById("pay-btn").disabled = false;
                 }
                 ;
             } else {
@@ -199,9 +202,10 @@
                                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         <strong>Đặt vé thất bại!</strong> xe đã hết chổ ngồi.
                                                     </div>`;
+                document.getElementById("pay-btn").disabled = false;
             }
             ;
-        });
+        });        
     }
     ;
     function updatePrice(price) {

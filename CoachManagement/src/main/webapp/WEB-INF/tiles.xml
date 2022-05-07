@@ -32,6 +32,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/pages/user/user-booking-history.jsp" />
     </definition>
     
+    <definition name="coaches-booking-staff" extends="baseLayout">
+        <put-attribute name="title" value="Đặt vé xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/staff/coaches-booking.jsp" />
+    </definition>
+    
     <definition name="ticket-management" extends="baseLayout">
         <put-attribute name="title" value="Quản lý vé xe" />
         <put-attribute name="content" value="/WEB-INF/pages/staff/ticket-management.jsp" />

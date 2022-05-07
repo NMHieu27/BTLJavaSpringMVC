@@ -6,6 +6,7 @@
 package com.hal.service;
 
 import com.hal.pojo.Ticket;
+import com.hal.pojo.User;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Linh
  */
 public interface TicketService {
-    Ticket addTicket(int coachesId, String phone, String fullname, String email, long price);
+    Ticket addTicket(int coachesId, String phone, String fullname, String email, long price, User user);
     int seatCheck(int coachesId);
     List<Ticket> getTicketsByCoachesId(int coachesId);
     boolean deleteTicket(int ticketId);

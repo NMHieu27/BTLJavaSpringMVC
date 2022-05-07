@@ -32,9 +32,10 @@ public class TicketServiceImpl implements TicketService {
     private UserRepository userRepository;
 
     @Override
-    public Ticket addTicket(int coachesId, String phone, String fullname, String email, long price) {
+    public Ticket addTicket(int coachesId, String phone, String fullname, String email, long price, User user) {
         Coaches coaches = this.coachesRepository.getCoachesById(coachesId);
-        User user = this.userRepository.getUserById(6);
+        if (user == null)
+            user = this.userRepository.getUserById(1);
 
         Ticket ticket = new Ticket();
         ticket.setCoachesId(coaches);

@@ -6,6 +6,7 @@
 package com.hal.controllers;
 
 import com.hal.pojo.Ticket;
+import com.hal.pojo.User;
 import com.hal.service.TicketService;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class ApiTicketController {
     @PostMapping(path = "api/add-ticket", produces = {
         MediaType.APPLICATION_JSON_VALUE
     })
-    public ResponseEntity<List<Ticket>> addTicket(@RequestBody Map<String, String> params) {
+    public ResponseEntity<List<Ticket>> addTicket(@RequestBody Map<String, String> params, HttpSession session) {
         try {
             String fullname = params.get("fullname");
             String email = params.get("email");
@@ -49,8 +50,9 @@ public class ApiTicketController {
             int amount = Integer.parseInt(params.get("amount"));
             
             List<Ticket> ticket = new ArrayList<>();
+            User user = (User) session.getAttribute("currentUser");
             for (int i=0; i<amount;i++)
-                ticket.add(this.ticketService.addTicket(coachesId, phone, fullname, email, price));
+                ticket.add(this.ticketService.addTicket(coachesId, phone, fullname, email, price, user));
             return new ResponseEntity<>(ticket, HttpStatus.CREATED);
         } catch (Exception ex){
             ex.printStackTrace();

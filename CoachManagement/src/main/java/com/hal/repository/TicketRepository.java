@@ -5,12 +5,15 @@
  */
 package com.hal.repository;
 
+import com.hal.pojo.Coaches;
 import com.hal.pojo.Ticket;
+import java.util.List;
 
 /**
  *
  * @author Linh
  */
 public interface TicketRepository {
-    boolean addTicket(Ticket ticket);
+    Ticket addTicket(Ticket ticket);
+    List<Ticket> getTicketsByChoachesId(int coachesId);
 }

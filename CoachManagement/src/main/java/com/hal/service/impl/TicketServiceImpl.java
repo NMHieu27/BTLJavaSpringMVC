@@ -13,6 +13,7 @@ import com.hal.repository.TicketRepository;
 import com.hal.repository.UserRepository;
 import com.hal.service.TicketService;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,9 @@ public class TicketServiceImpl implements TicketService{
     private CoachesRepository coachesRepository;
     @Autowired
     private UserRepository userRepository;
+    
     @Override
-    public boolean addTicket(int coachesId, String phone, String fullname, String email, long price) {
+    public Ticket addTicket(int coachesId, String phone, String fullname, String email, long price) {
         Coaches coaches = this.coachesRepository.getCoachesById(coachesId);
         User user = this.userRepository.getUserById(6);
         
@@ -42,7 +44,24 @@ public class TicketServiceImpl implements TicketService{
         ticket.setEmail(email);
         ticket.setPrice(price);
         ticket.setCreatedDate(new Date());
-        return this.ticketRepository.addTicket(ticket);
+        Ticket reticket = this.ticketRepository.addTicket(ticket);
+        if (reticket != null){
+            coaches.setEmptySeats(coaches.getEmptySeats()-1);
+            System.out.println(coaches.getEmptySeats());
+            this.coachesRepository.updateCoachesSeat(coaches);
+        }
+            
+        return reticket;
     }
     
+    @Override
+    public int seatCheck (int coachesId){
+        Coaches coaches = this.coachesRepository.getCoachesById(coachesId);
+        return coaches.getEmptySeats();
+    }
+    
+    @Override
+    public List<Ticket> getTicketsByCoachesId(int coachesId){
+        return this.ticketRepository.getTicketsByChoachesId(coachesId);
+    }
 }

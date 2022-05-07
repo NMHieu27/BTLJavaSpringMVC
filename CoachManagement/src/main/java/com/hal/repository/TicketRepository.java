@@ -16,4 +16,6 @@ import java.util.List;
 public interface TicketRepository {
     Ticket addTicket(Ticket ticket);
     List<Ticket> getTicketsByChoachesId(int coachesId);
+    Ticket getTicketById(int id);
+    boolean deleteTicket(Ticket ticket);
 }

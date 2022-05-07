@@ -24,7 +24,7 @@ public class HomeStaffController {
     private TicketService ticketService;
     @GetMapping("ticket-management")
     public String ticketManagement(Model model, HttpServletRequest request) {
-        model.addAttribute("ticket", this.ticketService.getTicketsByCoachesId(4));
+        model.addAttribute("tickets", this.ticketService.getTicketsByCoachesId(4));
         return "ticket-management";
     }
 }

@@ -31,6 +31,7 @@
         <h4>Bình luận:</h4>
         <c:forEach var="c" items="${comments}">
             <div class="my-date">
+                <img src="${c[3]}" class="rounded" alt="Ảnh người dùng">
                 <div>${c[0]}</div>
                 <i>${c[1]}</i>
                 <div>${c[2]}</div>
@@ -54,7 +55,8 @@
         }
     };
     function addComment(coachesId) {
-        if (document.getElementById("commentId").value.trim() != "") {
+        if( 1${currentUser.id} != 1){
+            if (document.getElementById("commentId").value.trim() != "") {
             fetch("/CoachManagement/api/add-comment", {
                 method: 'post',
                 body: JSON.stringify({
@@ -74,14 +76,18 @@
 
                 area.innerHTML = area.innerHTML + `
             <div class="my-date">
-                <div>UsernameTesting</div>
-                <div>` + data.content + `</div>   
-                <div>` + moment(data.createdDate).fromNow() + `</div>
+                <img src="` + data[3]+ `" class="rounded" alt="Ảnh người dùng">
+                <div>` + data[2] + `</div>
+                <i>` + moment(data[1]).fromNow() + `</i>
+                <div>` + data[0] + `</div>   
                 <br>
             </div>`;
             });
         }
         document.getElementById("commentId").value = "";
+        }else {
+            window.location.replace("http://localhost:8080/CoachManagement/login");
+        }
     }
     ;
 </script>

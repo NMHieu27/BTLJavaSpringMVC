@@ -5,7 +5,6 @@
  */
 package com.hal.repository.impl;
 
-import com.hal.pojo.Coaches;
 import com.hal.pojo.Ticket;
 import com.hal.repository.TicketRepository;
 import java.util.List;
@@ -51,11 +50,31 @@ public class TicketRepositoryImpl implements TicketRepository{
         Root rootTicket = query.from(Ticket.class);
         
         query.select(rootTicket);
-        System.out.println(rootTicket.get("coachesId").get("id"));
         query.where(builder.equal(rootTicket.get("coachesId"), coachesId));
-
+        System.out.println(session.createQuery(query).getResultList());
         
         return session.createQuery(query).getResultList();
+    }
+    
+    @Override
+    public Ticket getTicketById(int id) {
+        Ticket ticket;
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        ticket = session.get(Ticket.class, id);
+        return ticket;
+    }
+    
+    @Override
+    public boolean deleteTicket(Ticket ticket) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try{
+            session.delete(ticket);
+            return true;
+        }
+        catch(HibernateException ex){
+            System.out.println(ex);
+        }
+        return false;
     }
 
 }

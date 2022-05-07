@@ -95,11 +95,16 @@
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Đặt vé xe</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <button type="button" class="close" id="closeModal" data-dismiss="modal">&times;</button>
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <div class="form-group">
+					<label>Số lượng vé đặt:</label>
+                                            <div class="d-flex justify-content-between">                 
+                                                <input type="number" id="replyNumber" min="1" step="1" value="1" onchange="updatePrice(${c[4]})" data-bind="value:replyNumber" />
+                                                <label id="total">Thành tiền: ${c[4]}</label>
+                                            </div>
                                         <label>Họ tên</label>
                                         <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" />
                                     </div>
@@ -114,7 +119,7 @@
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <input class="btn-primary btn" onclick="addTicket()" type="button" value="Thanh toán"/>
+                                    <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
                                 </div>
                             </div>
                         </div>

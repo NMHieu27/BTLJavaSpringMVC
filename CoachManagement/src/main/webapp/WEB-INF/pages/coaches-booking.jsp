@@ -117,7 +117,7 @@
                                         <input type="text" id="email" class="form-control" required="required"/>
                                     </div>											
                                     <div class="modal-footer">
-                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="sunmit" value="Thanh toán"/>
+                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
                                     </div>
                                 </div>
                                 <!-- Modal footer -->

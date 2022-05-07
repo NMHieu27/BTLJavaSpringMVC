@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-primary elevation-4">
-<!--     Brand Logo -->
+    <!--     Brand Logo -->
     <a href="#" class="brand-link text-center">
         <span class="brand-text font-weight-light">ADMIN</span>
     </a>
@@ -17,14 +17,23 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img class="img-circle elevation-2" src="<c:url value="/images/2.jpg" />" alt="Avatar" />
+<!--                <img class="img-circle elevation-2" src="<c:url value="/images/2.jpg" />" alt="Avatar" />-->
+                <c:choose>
+                    <c:when test="${currentUser.avatar != null && currentUser.avatar.startsWith('https') == true}">
+                        <img class="img-circle elevation-2" src="${currentUser.avatar}" alt="Card image">
+                    </c:when>
+
+                    <c:when test="${currentUser.avatar == null || currentUser.avatar.startsWith('https') == false}">
+                        <img class="img-circle elevation-2" src="<c:url value="/images/default.jpg" />" alt="Card image">
+                    </c:when>
+                </c:choose>
             </div>
             <div class="info">
-                <a href="#" class="d-block">Híu nè</a>
+                <a href="#" class="d-block">${currentUser.fullname}</a>
             </div>
         </div>
 
-        
+
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul
@@ -33,8 +42,8 @@
                 role="menu"
                 data-accordion="false"
                 >
-          
-                
+
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
@@ -76,7 +85,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -99,6 +108,14 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="<c:url value="/logout" />" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt "></i>
+                        <p>
+                            Đăng xuất
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

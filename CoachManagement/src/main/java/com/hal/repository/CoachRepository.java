@@ -17,4 +17,6 @@ public interface CoachRepository {
     Coach getCoachById(int coachId);
     boolean deleteCoach(Coach coach);
     boolean updateCoachByAdmin(Coach coach, int coachId);
+    boolean checkCoachName(String name);
+    boolean checkCoachLicenseplates(String licenseplates);
 }

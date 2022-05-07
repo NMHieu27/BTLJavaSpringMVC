@@ -100,4 +100,14 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
 
+    @Override
+    public boolean checkUsername(String username) {
+        return this.userRepository.checkUsername(username);
+    }
+
+    @Override
+    public boolean checkPhone(String phone) {
+        return this.userRepository.checkPhone(phone);
+    }
+
 }

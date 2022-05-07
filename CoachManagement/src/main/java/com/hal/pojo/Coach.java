@@ -5,6 +5,8 @@
 package com.hal.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hal.validator.CoachLicenseplates;
+import com.hal.validator.CoachName;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -55,11 +57,13 @@ public class Coach implements Serializable {
     @NotNull(message = "{coach.name.notNullMsg}")
     @Size(min = 1, max = 100, message = "{coach.name.sizeMsg}")
     @Column(name = "name")
+//    @CoachName(message = "{coach.name.error.coachNameMsg}")
     private String name;
     @Basic(optional = false)
     @NotNull(message = "{coach.licenseplates.notNullMsg}")
     @Size(min = 1, max = 15, message = "{coach.licenseplates.sizeMsg}")
     @Column(name = "licenseplates")
+//    @CoachLicenseplates(message = "{coach.licenseplates.error.coachLicenseplatesMsg}")
     private String licenseplates;
     @Basic(optional = false)
     @NotNull(message = "{coach.price.notNullMsg}")

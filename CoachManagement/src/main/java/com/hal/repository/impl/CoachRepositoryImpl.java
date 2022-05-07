@@ -94,5 +94,27 @@ public class CoachRepositoryImpl implements CoachRepository{
         cu = cu.where(builder.equal(root.get("id").as(Integer.class), coachId));
         return session.createQuery(cu).executeUpdate() > 0;
     }
+
+    @Override
+    public boolean checkCoachName(String name) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Coach> query = builder.createQuery(Coach.class);
+        Root root = query.from(Coach.class);
+        query = query.select(root);
+        query.where(builder.equal(builder.upper(root.get("name").as(String.class)),name.toUpperCase()));
+        return session.createQuery(query).getSingleResult() == null;
+    }
+
+    @Override
+    public boolean checkCoachLicenseplates(String licenseplates) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Coach> query = builder.createQuery(Coach.class);
+        Root root = query.from(Coach.class);
+        query = query.select(root);
+        query.where(builder.equal(builder.upper(root.get("licenseplates").as(String.class)),licenseplates.toUpperCase()));
+        return session.createQuery(query).getSingleResult() == null;
+    }
     
 }

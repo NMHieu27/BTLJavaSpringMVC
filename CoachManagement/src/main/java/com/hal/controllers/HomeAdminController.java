@@ -71,7 +71,7 @@ public class HomeAdminController {
     //Qu?n l� ng??i d�ng
     @GetMapping("/users-manage")
     public String usersManage(Model model,
-            @RequestParam(name = "kw", defaultValue = "") String kw) {
+            @RequestParam(name = "kw", defaultValue = "") String kw){
         model.addAttribute("users", this.userService.getUsers(kw));
         return "users-manage";
     }
@@ -88,7 +88,7 @@ public class HomeAdminController {
         if (result.hasErrors()) {
             return "add-user";
         }
-        if (user.getFile() == null){
+        if (user.getFile() == null) {
             model.addAttribute("errMsg", "Mời bạn thiết lập ảnh đại diện!");
             return "add-user";
         }
@@ -104,7 +104,7 @@ public class HomeAdminController {
 
     @PostMapping("/users-manage/update-user/{user_id}")
     public String updatePriceProcess(Model model,
-            @ModelAttribute(value = "user")  User user,
+            @ModelAttribute(value = "user") User user,
             BindingResult result,
             @PathVariable(value = "user_id") int i) {
 //        if (this.userService.updateUserByAdmin(user, i) == true) {

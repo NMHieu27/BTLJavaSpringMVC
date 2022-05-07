@@ -5,6 +5,8 @@
 package com.hal.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hal.validator.UserPhone;
+import com.hal.validator.UserUsername;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -66,6 +68,7 @@ public class User implements Serializable {
     @NotNull(message = "{user.username.notNullMsg}")
     @Size(min = 1, max = 45, message = "{user.username.sizeMsg}")
     @Column(name = "username")
+//    @UserUsername(message = "{user.username.error.UserUsernameMsg}")
     private String username;
     @Basic(optional = false)
     @NotNull(message = "{user.password.notNullMsg}")
@@ -77,6 +80,7 @@ public class User implements Serializable {
     @NotNull(message = "{user.phone.notNullMsg}")
     @Size(min = 1, max = 10, message = "{user.phone.sizeMsg}")
     @Column(name = "phone")
+//    @UserPhone(message = "{user.phone.error.UserPhoneMsg}")
     private String phone;
     @NotNull(message = "{user.fullname.notNullMsg}")
     @Size(max = 100, message = "{user.fullname.maxMsg}")

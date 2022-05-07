@@ -127,4 +127,26 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return session.createQuery(query).getResultList();
     }
+
+    @Override
+    public boolean checkUsername(String username) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+        query.where(builder.equal(builder.upper(root.get("username").as(String.class)), username.toUpperCase()));
+        return session.createQuery(query).getSingleResult() == null;
+    }
+
+    @Override
+    public boolean checkPhone(String phone) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+        query.where(builder.equal(root.get("phone").as(String.class), phone));
+        return session.createQuery(query).getSingleResult() == null;
+    }
 }

@@ -61,7 +61,7 @@
 
                         <div class="form-group">
                             <label for="phone">Số điện thoại</label>
-                            <form:input type="text" id="phone" path="phone" class="form-control" />
+                            <form:input type="text" id="phone" path="phone" oninput="numberOnly(this.id);" maxlength="10" class="form-control" />
                             <form:errors path="phone" cssClass="text-danger" />
                         </div>
                         <div class="form-group">
@@ -138,4 +138,9 @@
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+
+    function numberOnly(id) {
+        var element = document.getElementById(id);
+        element.value = element.value.replace(/[^0-9]/gi, "");
+    }
 </script>

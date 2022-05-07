@@ -46,4 +46,9 @@ public class PriceChangeServiceImpl implements PriceChangeService {
         return this.priceChangeRepository.updatePrice(prchng, priceId);
     }
 
+    @Override
+    public boolean checkPriceChangeName(String pricechange) {
+        return this.priceChangeRepository.checkPriceChangeName(pricechange);
+    }
+
 }

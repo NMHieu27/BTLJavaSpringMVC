@@ -86,6 +86,7 @@ public class HomeController {
             return "login";
         }
         model.addAttribute("tickets", this.coachesService.getCoachesDetailsByUser(user.getId()));
+
         return "user-booking-history";
     }
 }

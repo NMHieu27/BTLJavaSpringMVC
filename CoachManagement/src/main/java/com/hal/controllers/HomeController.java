@@ -35,12 +35,12 @@ public class HomeController {
     private CoachesService coachesService;
     @Autowired
     private CommentService commentService;
-   
+
     @ModelAttribute
-    public void commonAttrs(Model model, HttpSession session){
+    public void commonAttrs(Model model, HttpSession session) {
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
     }
-    
+
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("location", this.locationService.getLocations(null));
@@ -53,36 +53,40 @@ public class HomeController {
         int destination = 2;
         Date startDate = new Date();
         if (null != request.getQueryString()) {
-            if (startDate.before(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")))){
+            if (startDate.before(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date")))) {
                 startDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
             }
             start = Integer.parseInt(request.getParameter("start"));
             destination = Integer.parseInt(request.getParameter("destination"));
         }
+//        int page = Integer.parseInt(request.getParameter("page"));
         model.addAttribute("location", this.locationService.getLocations(null));
+//        model.addAttribute("coachesCounter", this.coachesService.countCoaches());
         model.addAttribute("coaches", this.coachesService.getCoachesDetails(start, destination, startDate));
         model.addAttribute("startId", request.getParameter("start"));
         model.addAttribute("destination", request.getParameter("destination"));
-        model.addAttribute("date",  new SimpleDateFormat("yyyy-MM-dd").format(startDate));
+        model.addAttribute("date", new SimpleDateFormat("yyyy-MM-dd").format(startDate));
         return "coaches-booking";
     }
 
     @GetMapping("coaches-detail")
     public String getCoachesDetail(Model model, HttpServletRequest request) {
-        if (null != request.getQueryString()){
+        if (null != request.getQueryString()) {
             model.addAttribute("coa", this.coachesService.getCoachesDetailsById(Integer.parseInt(request.getParameter("coachesId"))).get(0));
             model.addAttribute("comments", this.commentService.getComments(Integer.parseInt(request.getParameter("coachId")), Integer.parseInt(request.getParameter("routeId"))));
             model.addAttribute("coachesId", Integer.parseInt(request.getParameter("coachesId")));
         }
         return "coaches-detail";
     }
-    
+
     @GetMapping("user-booking-history")
     public String getUserBookingHistory(Model model, HttpServletRequest request, HttpSession session) {
-            User user = (User) session.getAttribute("currentUser");
-            if(user == null)
-                return "login";
-            model.addAttribute("tickets", this.coachesService.getCoachesDetailsByUser(user.getId()));
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            return "login";
+        }
+        model.addAttribute("tickets", this.coachesService.getCoachesDetailsByUser(user.getId()));
+
         return "user-booking-history";
     }
 }

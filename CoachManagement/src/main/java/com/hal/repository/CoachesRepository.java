@@ -23,4 +23,5 @@ public interface CoachesRepository {
     List<Object[]> getCoachesDetailsById(int coachesId);
     List<Object[]> getCoachesDetailsByUser(int userId);
     boolean updateCoachesSeat(Coaches coaches);
+    long countCoaches();
 }

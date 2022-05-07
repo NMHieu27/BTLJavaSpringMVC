@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <div class="container d-flex justify-content-center align-items-center my-2" id="main-div">
     <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
@@ -37,21 +38,21 @@
     </form>
 </div>
 <br>
-    <div>
+<div>
     <c:forEach var="c" items="${coaches}">
         <div>
             <div class="row">
                 <!--Test-->
                 <div class="card mb-3 w-auto" >
                     <div class="row no-gutters">
-                        <div class="col-md-4">
+                        <div class="col-md-4"> 
                             <c:choose>
                                 <c:when test="${c[9] != null && c[9].startsWith('https') == true}">
-                                    <img class="rounded w-100 h-100" width="335" height="335" src="${c[9]}" alt="coach image">
+                                    <img class="rounded w-100 h-100" src="${c[9]}" alt="coach image">
                                 </c:when>
 
                                 <c:when test="${c[9] == null || c[9].startsWith('https') == false}">
-                                    <img class="rounded w-100 h-100 " width="335" height="335" src="<c:url value="/images/default.jpg" />" alt="coach image">
+                                    <img class="rounded w-100 h-100 " src="<c:url value="/images/default.jpg" />" alt="coach image">
                                 </c:when>
                             </c:choose>
                         </div>
@@ -100,11 +101,11 @@
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <div class="form-group">
-					<label>Số lượng vé đặt:</label>
-                                            <div class="d-flex justify-content-between">                 
-                                                <input type="number" id="replyNumber" min="1" step="1" value="1" onchange="updatePrice(${c[4]})" data-bind="value:replyNumber" />
-                                                <label id="total">Thành tiền: ${c[4]}</label>
-                                            </div>
+                                        <label>Số lượng vé đặt:</label>
+                                        <div class="d-flex justify-content-between">                 
+                                            <input type="number" id="replyNumber" min="1" step="1" value="1" onchange="updatePrice(${c[4]})" data-bind="value:replyNumber" />
+                                            <label id="total">Thành tiền: ${c[4]}</label>
+                                        </div>
                                         <label>Họ tên</label>
                                         <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" required="required"/>
                                     </div>

@@ -8,7 +8,6 @@ package com.hal.controllers;
 import com.hal.pojo.Ticket;
 import com.hal.pojo.User;
 import com.hal.service.TicketService;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

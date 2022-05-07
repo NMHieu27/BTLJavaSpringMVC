@@ -8,7 +8,6 @@ import com.hal.pojo.Coach;
 import com.hal.pojo.Coaches;
 import com.hal.pojo.Pricechange;
 import com.hal.pojo.Route;
-import com.hal.pojo.Station;
 import com.hal.pojo.Ticket;
 import com.hal.pojo.User;
 import com.hal.repository.CoachesRepository;
@@ -128,6 +127,7 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         return session.createQuery(cu).executeUpdate() > 0;
     }
 
+    @Override
     public List<Object[]> getCoachesDetails(int start, int end, Date startDate) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -167,6 +167,13 @@ public class CoachesRepositoryImpl implements CoachesRepository {
 
         query.where(predicates.toArray(new Predicate[]{}));
         Query q = session.createQuery(query);
+        
+        //Phân trang 
+//        int max = 5;
+//        int index = (page - 1) * max;
+//        q.setFirstResult(index);
+//        q.setMaxResults(max);
+        
         return q.getResultList();
     }
 
@@ -252,4 +259,11 @@ public class CoachesRepositoryImpl implements CoachesRepository {
         }
         return false;
     }   
+
+    @Override
+    public long countCoaches() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("SELECT COUNT(*) FROM Coaches");
+        return Long.parseLong(q.getSingleResult().toString());
+    }
 }

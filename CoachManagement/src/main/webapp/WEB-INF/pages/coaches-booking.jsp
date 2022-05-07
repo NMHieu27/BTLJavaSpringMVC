@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <div class="container d-flex justify-content-center align-items-center my-2" id="main-div">
     <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
@@ -36,6 +37,7 @@
         </div>
     </form>
 </div>
+<br>
 <br>
 <div>
     <c:forEach var="c" items="${coaches}">

@@ -56,16 +56,18 @@ public class HomeController {
                 startDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"));
             }
             start = Integer.parseInt(request.getParameter("start"));
-            destination = Integer.parseInt(request.getParameter("destination"));
+            destination = Integer.parseInt(request.getParameter("destination"));  
         }
+//        int page = Integer.parseInt(request.getParameter("page"));
         model.addAttribute("location", this.locationService.getLocations(null));
+//        model.addAttribute("coachesCounter", this.coachesService.countCoaches());
         model.addAttribute("coaches", this.coachesService.getCoachesDetails(start, destination, startDate));
         model.addAttribute("startId", request.getParameter("start"));
         model.addAttribute("destination", request.getParameter("destination"));
         model.addAttribute("date",  new SimpleDateFormat("yyyy-MM-dd").format(startDate));
         return "coaches-booking";
     }
-
+    
     @GetMapping("coaches-detail")
     public String getCoachesDetail(Model model, HttpServletRequest request) {
         if (null != request.getQueryString()){

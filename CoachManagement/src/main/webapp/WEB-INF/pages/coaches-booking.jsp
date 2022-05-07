@@ -47,11 +47,11 @@
                         <div class="col-md-4">
                             <c:choose>
                                 <c:when test="${c[9] != null && c[9].startsWith('https') == true}">
-                                    <img class="rounded w-100 h-100" width="335" height="335" src="${c[9]}" alt="coach image">
+                                    <img class="rounded w-100 h-100" src="${c[9]}" alt="coach image">
                                 </c:when>
 
                                 <c:when test="${c[9] == null || c[9].startsWith('https') == false}">
-                                    <img class="rounded w-100 h-100 " width="335" height="335" src="<c:url value="/images/default.jpg" />" alt="coach image">
+                                    <img class="rounded w-100 h-100 " src="<c:url value="/images/default.jpg" />" alt="coach image">
                                 </c:when>
                             </c:choose>
                         </div>

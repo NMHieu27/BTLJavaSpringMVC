@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container d-flex justify-content-center align-items-center my-2">
+<div class="container d-flex justify-content-center align-items-center my-2 ">
     <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
         <div class="col-md-3">
             <label>Chọn điểm xuất phát</label>

@@ -37,7 +37,8 @@
     </form>
 </div>
 <br>
-<div>
+<c:if test="${currentUser.userRole == 'ROLE_USER'}">
+    <div>
     <c:forEach var="c" items="${coaches}">
         <div>
             <div class="row">
@@ -106,21 +107,22 @@
                                                 <label id="total">Thành tiền: ${c[4]}</label>
                                             </div>
                                         <label>Họ tên</label>
-                                        <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" />
+                                        <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" required="required"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Số điện thoại</label>
-                                        <input type="text" id="phone" class="form-control" />
+                                        <input type="text" id="phone" class="form-control" required="required"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Địa chỉ email</label>
-                                        <input type="text" id="email" class="form-control" />
+                                        <input type="text" id="email" class="form-control" required="required"/>
                                     </div>											
+                                    <div class="modal-footer">
+                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="sunmit" value="Thanh toán"/>
+                                    </div>
                                 </div>
                                 <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -130,6 +132,105 @@
         <br>
     </c:forEach>
 </div>
+</c:if>
+
+<c:if test="${currentUser.userRole == 'ROLE_STAFF'}">
+<div>
+    <c:forEach var="c" items="${coaches}">
+        <div>
+            <div class="row">
+                <!--Test-->
+                <div class="card mb-3 w-auto" >
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <c:choose>
+                                <c:when test="${c[9] != null && c[9].startsWith('https') == true}">
+                                    <img class="rounded w-100 h-100" width="335" height="335" src="${c[9]}" alt="coach image">
+                                </c:when>
+
+                                <c:when test="${c[9] == null || c[9].startsWith('https') == false}">
+                                    <img class="rounded w-100 h-100 " width="335" height="335" src="<c:url value="/images/default.jpg" />" alt="coach image">
+                                </c:when>
+                            </c:choose>
+                        </div>
+                        <div class="col-md-8">
+
+                            <div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <h5 class="card-title"> ${c[8]}</h5>
+                                            <div>Tên chuyến: ${c[0]}</div>
+                                            <div>Giờ bắt đầu: ${c[1]}</div>
+                                            <div>Giờ dự kiến tới nơi: ${c[2]}</div>
+                                            <div>Ghế trống: ${c[3]}</div>
+                                            <div>Tuyến xe: ${c[5]}</div>
+                                            <div>Trạm xuất phát: ${c[6]}</div>
+                                            <div>Trạm kết thúc: ${c[7]}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div>Giá vé: ${c[4]}</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a class="pl-4 pt-2" href="<c:url value="/staff/ticket-management?coachesId=${c[12]}"/>">Kiểm tra vé</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-primary" style="margin: 0px 0px 16px; padding: 6px 12px" data-toggle="modal" data-target="#myModal">Đặt vé</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Test-->
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Đặt vé xe</h4>
+                                    <button type="button" class="close" id="closeModal" data-dismiss="modal">&times;</button>
+                                </div>
+                                <!-- Modal body -->
+                                <form>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Số lượng vé đặt:</label>
+                                                <div class="d-flex justify-content-between">                 
+                                                    <input type="number" id="replyNumber" min="1" step="1" value="1" onchange="updatePrice(${c[4]})" data-bind="value:replyNumber" />
+                                                    <label id="total">Thành tiền: ${c[4]}</label>
+                                                </div>
+                                            <label>Họ tên</label>
+                                            <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" id="phone" class="form-control" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Địa chỉ email</label>
+                                            <input type="text" id="email" class="form-control" required="required"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="submit" value="Thanh toán"/>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- Modal footer -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <br>
+    </c:forEach>
+</div>
+</c:if>
 <script>
     window.onload = function () {
         var date = new Date();
@@ -159,7 +260,8 @@
         }).then(function (data) {
             console.info(data);
             if (document.getElementById("replyNumber").value <= data) {
-                fetch("/CoachManagement/api/add-ticket", {
+                if (document.getElementById("fullname").value.trim() !== "" && document.getElementById("phone").value.trim() !== "" && document.getElementById("email").value.trim() !== "") {
+                    fetch("/CoachManagement/api/add-ticket", {
                     method: 'post',
                     body: JSON.stringify({
                         "fullname": document.getElementById("fullname").value,
@@ -184,15 +286,14 @@
                                                         <strong>Đặt vé thành công!</strong> Vui lòng kiểm tra email và số điện thoại.
                                                     </div>`;
                 });
-            }else{
+            }}else{
                 let area = document.getElementById("myModal");
                     area.innerHTML = area.innerHTML + `<div class="alert alert-danger alert-dismissible fixed-bottom">
                                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         <strong>Đặt vé thất bại!</strong> xe đã hết chổ ngồi.
                                                     </div>`;
-            }
+                    }
         });
-
     }
     ;
     function updatePrice(price) {

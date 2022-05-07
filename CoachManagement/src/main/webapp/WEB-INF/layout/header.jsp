@@ -12,16 +12,18 @@
             <a class="nav-link " href="<c:url value="/"/>">Trang chủ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link " href="<c:url value="/coaches-booking"/>">Đặt vé xe</a>
+            <c:choose>
+                <c:when test="${currentUser.userRole == 'ROLE_STAFF'}">
+                    <a class="nav-link " href="<c:url value="/staff/coaches-booking"/>">Đặt vé xe</a>
+                </c:when>
+                <c:otherwise>
+                    <a class="nav-link " href="<c:url value="/coaches-booking"/>">Đặt vé xe</a>
+                </c:otherwise>
+            </c:choose>
         </li>
         <c:if test="${currentUser.userRole == 'ROLE_USER'}">
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/user-booking-history"/>">Xem lịch sử</a>
-            </li>
-        </c:if>
-        <c:if test="${currentUser.userRole == 'ROLE_STAFF'}">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/staff/ticket-management"/>">Xem vé xe</a>
             </li>
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name == null}">

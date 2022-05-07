@@ -22,16 +22,32 @@
             <label>Chọn điểm đến</label>
             <select name="destination" class="custom-select">
                 <c:forEach var="l" items="${location}">
-                    <option value="${l.id}">${l.name}</option>
+                    <option value="${l.id}" <c:if test="${l.id == '2'}">selected="selected"</c:if>>${l.name}</option>
                 </c:forEach>
             </select>
         </div>        
         <div class="col-md-3">
             <label for="date">Chọn ngày đi</label>
-            <input name="date" class="form-control" type="date" required>
+            <input name="date" class="form-control" id="datePicker" type="date" required>
         </div>
         <div class="col-md-2">
             <button type="submit" class="btn btn-outline-primary" style="margin-top: 2rem">Tìm kiếm xe</button>
         </div>
     </form>
 </div>
+<script>
+    window.onload = function () {
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = year + "-" + month + "-" + day;
+        let datePicker = document.getElementById('datePicker');
+        datePicker.value = today;
+        datePicker.setAttribute("min", today);
+    };
+</script>

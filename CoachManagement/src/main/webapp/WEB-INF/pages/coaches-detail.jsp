@@ -12,20 +12,18 @@
     <div>
         <div class="row">
             <div class="col-md-2">
-                <img src="${coa[9]}" class="rounded" alt="Ảnh xe">
+                <img src="${coa[7]}" class="rounded" alt="Ảnh xe">
             </div>
             <div class="col-md-10">
-                <div>Tên xe: ${coa[8]}</div>
+                <div>Tên xe: ${coa[6]}</div>
                 <div class="row">
                     <div class="col-sm-7">Tên chuyến: ${coa[0]}</div>
-                    <div class="col-md-5">Giá vé: ${coa[4]}</div>
                 </div>
                 <div>Giờ bắt đầu: ${coa[1]}</div>
                 <div>Giờ dự kiến tới nơi: ${coa[2]}</div>
-                <div>Ghế trống: ${coa[3]}</div>
-                <div>Tuyến xe: ${coa[5]}</div>
-                <div>Trạm xuất phát: ${coa[6]}</div>
-                <div>Trạm kết thúc: ${coa[7]}</div>
+                <div>Tuyến xe: ${coa[3]}</div>
+                <div>Trạm xuất phát: ${coa[4]}</div>
+                <div>Trạm kết thúc: ${coa[5]}</div>
             </div>
         </div>         
     </div>
@@ -33,6 +31,7 @@
         <h4>Bình luận:</h4>
         <c:forEach var="c" items="${comments}">
             <div class="my-date">
+                <img src="${c[3]}" class="rounded" alt="Ảnh người dùng">
                 <div>${c[0]}</div>
                 <i>${c[1]}</i>
                 <div>${c[2]}</div>
@@ -56,32 +55,39 @@
         }
     };
     function addComment(coachesId) {
-        fetch("/CoachManagement/api/add-comment", {
-            method: 'post',
-            body: JSON.stringify({
-                "content": document.getElementById("commentId").value,
-                "coachesId": coachesId
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function (res) {
-            console.info(res);
-            return res.json();
-        }).then(function (data) {
-            console.info(data);
+        if( 1${currentUser.id} != 1){
+            if (document.getElementById("commentId").value.trim() != "") {
+            fetch("/CoachManagement/api/add-comment", {
+                method: 'post',
+                body: JSON.stringify({
+                    "content": document.getElementById("commentId").value.trim(),
+                    "coachesId": coachesId
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(function (res) {
+                console.info(res);
+                return res.json();
+            }).then(function (data) {
+                console.info(data);
 
-            let area = document.getElementById("commentArea");
+                let area = document.getElementById("commentArea");
 
-            area.innerHTML = area.innerHTML + `
+                area.innerHTML = area.innerHTML + `
             <div class="my-date">
-                <div>UsernameTesting</div>
-                <div>` + data.content + `</div>   
-                <div>` + moment(data.createdDate).fromNow() + `</div>
+                <img src="` + data[3]+ `" class="rounded" alt="Ảnh người dùng">
+                <div>` + data[2] + `</div>
+                <i>` + moment(data[1]).fromNow() + `</i>
+                <div>` + data[0] + `</div>   
                 <br>
             </div>`;
-
-        });
+            });
+        }
+        document.getElementById("commentId").value = "";
+        }else {
+            window.location.replace("http://localhost:8080/CoachManagement/login");
+        }
     }
     ;
 </script>

@@ -39,9 +39,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment addComment(String content, int coachesId){
+    public Comment addComment(String content, int coachesId, User user){
         Coaches coaches = this.coachesRepository.getCoachesById(coachesId);
-        User user = this.userRepository.getUserById(3);
         
         Comment comment = new Comment();
         comment.setContent(content);

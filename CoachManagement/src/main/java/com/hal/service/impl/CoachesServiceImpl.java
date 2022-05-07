@@ -42,6 +42,8 @@ public class CoachesServiceImpl implements CoachesService {
     @Override
     public boolean addCoaches(Coaches coaches) {
         try {
+            coaches.setIsStarted(Boolean.FALSE);
+            coaches.setIsCanceled(Boolean.FALSE);
             coaches.setStartTime(LocalDateTime.parse(coaches.getStartDateString()));
             coaches.setEndTime(LocalDateTime.parse(coaches.getEndDateString()));
             return this.coachesRepository.addCoaches(coaches);

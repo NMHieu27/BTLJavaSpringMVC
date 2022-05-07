@@ -34,6 +34,7 @@
                         </div>
                         <div class="card-body p-4 p-sm-5">
                             <h5 class="card-title text-center mb-5 fw-light fs-5">ĐĂNG NHẬP</h5>
+                            
                             <c:if test="${param.error != null}">
                                 <div class="alert alert-danger">
                                     Đã có lỗi xảy ra! Vui lòng quay lại sau!
@@ -44,6 +45,7 @@
                                     Bạn không có quyền truy cập!!!
                                 </div>
                             </c:if>
+                            
                             <c:url value="/login" var="action" />
                             <form method="post" action="${action}">
                                 <div class="form-group">

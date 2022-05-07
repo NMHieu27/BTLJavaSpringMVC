@@ -71,5 +71,15 @@ public class CoachServiceImpl implements CoachService{
     public boolean updateCoachByAdmin(Coach coach, int i) {
         return this.coachRepository.updateCoachByAdmin(coach, i);
     }
+
+    @Override
+    public boolean checkCoachName(String name) {
+        return this.coachRepository.checkCoachName(name);
+    }
+
+    @Override
+    public boolean checkCoachLicenseplates(String licenseplates) {
+        return this.coachRepository.checkCoachLicenseplates(licenseplates);
+    }
     
 }

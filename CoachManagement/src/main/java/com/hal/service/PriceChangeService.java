@@ -17,4 +17,5 @@ public interface PriceChangeService {
     Pricechange getPriceById(int id);
     boolean deletePrice(Pricechange pricechange);
     boolean updatePrice(Pricechange pricechange, int priceId);
+    boolean checkPriceChangeName(String pricechange);
 }

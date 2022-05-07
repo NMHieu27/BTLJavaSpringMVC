@@ -32,12 +32,12 @@
     <div id="commentArea">
         <h4>Bình luận:</h4>
         <c:forEach var="c" items="${comments}">
-                    <div class="my-date">
-                        <div>${c[0]}</div>
-                        <i>${c[1]}</i>
-                        <div>${c[2]}</div>
-                        <br>
-                    </div>
+            <div class="my-date">
+                <div>${c[0]}</div>
+                <i>${c[1]}</i>
+                <div>${c[2]}</div>
+                <br>
+            </div>
         </c:forEach>
     </div>
     <div class="form-group">

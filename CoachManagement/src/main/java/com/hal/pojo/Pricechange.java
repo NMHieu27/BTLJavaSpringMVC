@@ -4,6 +4,7 @@
  */
 package com.hal.pojo;
 
+import com.hal.validator.PriceChangeName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -47,6 +48,7 @@ public class Pricechange implements Serializable {
     @NotNull(message = "{pricechange.name.notNullMsg}")
     @Size(min = 1, max = 255, message = "{pricechange.name.sizeMsg}")
     @Column(name = "name")
+//    @PriceChangeName(message = "{pricechange.name.error.priceChangeMsg}")
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)

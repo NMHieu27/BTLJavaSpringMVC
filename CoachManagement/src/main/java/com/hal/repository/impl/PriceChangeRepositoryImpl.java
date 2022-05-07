@@ -93,4 +93,15 @@ public class PriceChangeRepositoryImpl implements PriceChangeRepository {
         return session.createQuery(cu).executeUpdate() > 0;
     }
 
+    @Override
+    public boolean checkPriceChangeName(String pricechange) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Pricechange> cr = builder.createQuery(Pricechange.class);
+        Root root = cr.from(Pricechange.class);
+        CriteriaQuery query = cr.select(root);
+        query.where(builder.equal(builder.upper(root.get("name").as(String.class)), pricechange.toUpperCase()));
+        return session.createQuery(query).getSingleResult() == null;
+    }
+
 }

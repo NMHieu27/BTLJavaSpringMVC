@@ -1,6 +1,6 @@
 <%-- 
     Document   : coaches-booking
-    Created on : May 2, 2022, 3:43:25 AM
+    Created on : May 7, 2022, 12:38:12 PM
     Author     : Linh
 --%>
 
@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <div class="container d-flex justify-content-center align-items-center my-2" id="main-div">
-    <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
+    <form class="row" action="${pageContext.request.contextPath}/staff/coaches-booking">
         <div class="col-md-3">
             <label>Chọn điểm xuất phát</label>
             <select name="start" class="custom-select">
@@ -37,7 +37,7 @@
     </form>
 </div>
 <br>
-    <div>
+<div>
     <c:forEach var="c" items="${coaches}">
         <div>
             <div class="row">
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a class="pl-4 pt-2" href="<c:url value="/coaches-detail?coachId=${c[10]}&routeId=${c[11]}&coachesId=${c[12]}"/>">Xem thông tin</a>
+                                        <a class="pl-4 pt-2" href="<c:url value="/staff/ticket-management?coachesId=${c[12]}"/>">Kiểm tra vé</a>
                                     </div>
                                     <div class="col-md-6">
                                         <button type="button" class="btn btn-primary" style="margin: 0px 0px 16px; padding: 6px 12px" data-toggle="modal" data-target="#myModal">Đặt vé</button>
@@ -98,29 +98,29 @@
                                     <button type="button" class="close" id="closeModal" data-dismiss="modal">&times;</button>
                                 </div>
                                 <!-- Modal body -->
-                                <div class="modal-body">
-                                    <div class="form-group">
-					<label>Số lượng vé đặt:</label>
-                                            <div class="d-flex justify-content-between">                 
-                                                <input type="number" id="replyNumber" min="1" step="1" value="1" onchange="updatePrice(${c[4]})" data-bind="value:replyNumber" />
-                                                <label id="total">Thành tiền: ${c[4]}</label>
-                                            </div>
-                                        <label>Họ tên</label>
-                                        <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" required="required"/>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Số lượng vé đặt:</label>
+                                                <div class="d-flex justify-content-between">                 
+                                                    <input type="number" id="replyNumber" min="1" step="1" value="1" onchange="updatePrice(${c[4]})" data-bind="value:replyNumber" />
+                                                    <label id="total">Thành tiền: ${c[4]}</label>
+                                                </div>
+                                            <label>Họ tên</label>
+                                            <input type="text" id="fullname" value="${currentUser.fullname}" class="form-control" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Số điện thoại</label>
+                                            <input type="number" minlength="10" maxlength="11" id="phone" class="form-control" required="required"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Địa chỉ email</label>
+                                            <input type="text" id="email" class="form-control" required="required"/>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Số điện thoại</label>
-                                        <input type="text" id="phone" class="form-control" required="required"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Địa chỉ email</label>
-                                        <input type="text" id="email" class="form-control" required="required"/>
-                                    </div>											
-                                    <div class="modal-footer">
-                                        <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="sunmit" value="Thanh toán"/>
-                                    </div>
-                                </div>
                                 <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <input class="btn-primary btn" onclick="addTicket(${c[12]}, ${c[4]})" type="button" value="Thanh toán"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -185,14 +185,20 @@
                                                         <strong>Đặt vé thành công!</strong> Vui lòng kiểm tra email và số điện thoại.
                                                     </div>`;
                 });
-            }}else{
+            }else{
+                let area = document.getElementsByClassName("modal-footer");
+                    area.innerHTML = area.innerHTML + `<div class="alert alert-danger alert-dismissible fixed-bottom">
+                                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                        <strong>Vui lòng điền đầy đủ thông tin!</strong>
+                                                    </div>`;
+            }
+        }else{
                 let area = document.getElementById("myModal");
                     area.innerHTML = area.innerHTML + `<div class="alert alert-danger alert-dismissible fixed-bottom">
                                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                                         <strong>Đặt vé thất bại!</strong> xe đã hết chổ ngồi.
                                                     </div>`;
-                    }
-        });
+        };});
     }
     ;
     function updatePrice(price) {

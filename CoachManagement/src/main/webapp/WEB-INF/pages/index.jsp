@@ -8,7 +8,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="container d-flex justify-content-center align-items-center my-2">
-    <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
+    <c:choose>
+        <c:when test="${currentUser.userRole == 'ROLE_STAFF'}">
+            <form class="row" action="${pageContext.request.contextPath}/staff/coaches-booking">
+            </c:when>
+            <c:otherwise>
+                <form class="row" action="${pageContext.request.contextPath}/coaches-booking">
+			</c:otherwise>
+		</c:choose>
         <div class="col-md-3">
             <label>Chọn điểm xuất phát</label>
             <select name="start" class="custom-select">
